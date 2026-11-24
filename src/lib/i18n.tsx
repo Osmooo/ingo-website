@@ -259,7 +259,7 @@ const DICT = {
   "rc.grind": ["الطحنة", "Grind"],
   "rc.pours": ["جدول الصب", "Pour schedule"],
   "rc.bloom": ["صبة التشريب: بلّل القهوة كلها واتركها تنتفخ", "Bloom: wet all the coffee and let it rise"],
-  "rc.pourTo": ["صب بهدوء بحركة دائرية حتى يوصل الميزان إلى", "Pour slowly in circles until the scale reads"],
+  "rc.pourTo": ["صب بهدوء بحركة دائرية حتى يوصل الميزان للرقم", "Pour slowly in circles until the scale shows this total"],
   "rc.iceNote": ["حط {x} جم ثلج في الإبريق قبل ما تبدأ، والقهوة تنزل عليه مباشرة.", "Put {x}g of ice in the jug before you start; the coffee drips straight onto it."],
   "rc.espNote": ["{x} جم قهوة مطحونة تعطي {y} جم إسبريسو في الكوب. استخدم ميزان تحت الكوب.", "{x}g of ground coffee gives {y}g of espresso in the cup. Use a scale under the cup."],
   "rc.tip": ["نصيحة", "Tip"],

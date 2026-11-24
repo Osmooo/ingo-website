@@ -3,35 +3,14 @@ import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight, CreditCard, Flag, Flame, ShieldCheck, Truck } from "lucide-react";
 import { PackArt } from "@/components/brand/pack-art";
 import { Button } from "@/components/ui/button";
-import { CONFIG } from "@/lib/config";
 import { useI18n } from "@/lib/i18n";
-import { announcement, isLive, ribbons, slides, values, type RibbonTone, type Slide, type ValueIcon } from "@/lib/storefront";
+import { isLive, ribbons, slides, values, type RibbonTone, type Slide, type ValueIcon } from "@/lib/storefront";
 import { cn } from "@/lib/utils";
 
 /**
  * Storefront blocks. Content comes from lib/storefront.ts; each block matches an Odoo website block
  * so it can be rebuilt there and edited without code. No auto-play and no moving parts.
  */
-
-/* ---------------- announcement bar ---------------- */
-export function AnnouncementBar() {
-  const { L, money } = useI18n();
-  const live = announcement.filter((a) => isLive(a));
-  if (!live.length) return null;
-  const text = (i: number) => L(live[i].text).replace("{shipping}", money(CONFIG.freeShippingOver));
-  return (
-    <div className="bg-foreground text-background">
-      <ul className="container-ingo flex min-h-9 items-center justify-center gap-x-8 py-1.5 text-center text-xs font-semibold md:text-sm">
-        {live.map((a, i) => (
-          // phones show the first message only; wider screens show them side by side
-          <li key={i} className={cn(i > 0 && "hidden", i === 1 && "md:block", i >= 2 && "lg:block")}>
-            {a.link ? <Link to={a.link} className="underline-offset-4 hover:underline">{text(i)}</Link> : text(i)}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
 
 /* ---------------- banner slider ---------------- */
 const THEME: Record<Slide["theme"], string> = {
@@ -152,7 +131,7 @@ export function ValueStrip() {
       {values.map((v) => {
         const Icon = VALUE_ICON[v.icon];
         return (
-          <li key={v.icon} className="flex items-center gap-3 rounded-2xl border bg-card p-4">
+          <li key={v.icon} className="flex flex-col items-start gap-2 rounded-2xl border bg-card p-4 sm:flex-row sm:items-center sm:gap-3 max-md:last:odd:col-span-2">
             <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-secondary text-flame-ink"><Icon aria-hidden className="size-5" /></span>
             <span className="min-w-0">
               <span className="block text-sm font-bold">{L(v.title)}</span>

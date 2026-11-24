@@ -190,8 +190,8 @@ export default function Business() {
       <section id="register" className="scroll-mt-21 pb-20 md:pb-28" ref={formRef}>
         <div className="container-ingo grid items-start gap-8 lg:grid-cols-[.8fr_1.2fr]">
           <aside className="grid gap-5 lg:sticky lg:top-28">
-            <div className="rounded-[2rem] bg-card p-8 ring-1 ring-border">
-              <img src={MACHINE} alt="" aria-hidden className="float-end -mt-2 -me-2 ms-3 h-36 w-auto mix-blend-multiply" />
+            <div className="rounded-[2rem] bg-card p-6 ring-1 ring-border sm:p-8">
+              <img src={MACHINE} alt="" aria-hidden className="float-end -mt-2 -me-2 ms-3 hidden h-36 w-auto mix-blend-multiply sm:block" />
               <h2 className="text-3xl"><Display text={t("biz.ben")} /></h2>
               <ul className="mt-5 grid gap-3.5">
                 {(["biz.ben1", "biz.ben2", "biz.ben3", "biz.ben4", "biz.ben5", "biz.ben6"] as const).map((k) => (

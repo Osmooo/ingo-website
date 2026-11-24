@@ -52,9 +52,9 @@ export function ProductCard({ p }: { p: Product }) {
         {/* badge from lib/storefront.ts (New / Best seller / Sale / Sold out); nothing shows until one is set */}
         <ProductRibbon id={p.id} className="pointer-events-none absolute top-4 end-4 shadow-sm" />
 
-        {/* quick add: one tap per size, revealed on hover / keyboard focus (always visible on touch) */}
+        {/* quick add: one tap per size, revealed on hover / keyboard focus; not on phones, where the sizes and add button under the image already do this and the panel would cover the label */}
         <div
-          className="absolute inset-x-4 bottom-4 flex translate-y-0 flex-wrap items-center justify-center gap-2 rounded-2xl bg-card/95 p-2 shadow-lg backdrop-blur transition-[opacity,transform] duration-300 [@media(hover:hover)]:translate-y-3 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:translate-y-0 [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:focus-within:translate-y-0 [@media(hover:hover)]:focus-within:opacity-100"
+          className="absolute inset-x-4 bottom-4 hidden translate-y-0 flex-wrap [@media(hover:hover)]:flex items-center justify-center gap-2 rounded-2xl bg-card/95 p-2 shadow-lg backdrop-blur transition-[opacity,transform] duration-300 [@media(hover:hover)]:translate-y-3 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:translate-y-0 [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:focus-within:translate-y-0 [@media(hover:hover)]:focus-within:opacity-100"
           role="group"
           aria-label={`${t("store.quick")} — ${L(p.name)}`}
         >

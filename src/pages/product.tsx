@@ -175,7 +175,7 @@ function ProductView({ p }: { p: Product }) {
               {p.sizes.length > 1 && (
                 <fieldset className="mt-6">
                   <legend className="mb-2 text-sm font-medium">{t("pd.size")}</legend>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="grid grid-cols-3 gap-2 sm:flex sm:flex-wrap">
                     {p.sizes.map((s) => (
                       <button
                         key={s.w}
@@ -183,12 +183,12 @@ function ProductView({ p }: { p: Product }) {
                         aria-pressed={size === s.w}
                         onClick={() => pickSize(s.w)}
                         className={cn(
-                          "flex items-center gap-2.5 rounded-2xl border px-4 py-3 text-start outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
+                          "flex items-center gap-2 rounded-2xl border px-3 py-3 text-start outline-none sm:gap-2.5 sm:px-4 transition-colors focus-visible:ring-2 focus-visible:ring-ring",
                           size === s.w ? "border-foreground bg-card shadow-sm" : "bg-background hover:border-apricot",
                         )}
                       >
                         {/* swatch: the real bag colour for that size (1kg orange, others cream) */}
-                        <span aria-hidden className={cn("size-5 rounded-full ring-1 ring-foreground/15", s.w === "1kg" ? "bg-orange" : "bg-cream")} />
+                        <span aria-hidden className={cn("size-4 shrink-0 rounded-full ring-1 ring-foreground/15 sm:size-5", s.w === "1kg" ? "bg-orange" : "bg-cream")} />
                         <span>
                           <span className="block font-bold">{sz(s.w)}</span>
                           <span className="text-xs text-muted-foreground tabular-nums">{money(s.price)}</span>
@@ -235,7 +235,7 @@ function ProductView({ p }: { p: Product }) {
                     ...(p.art === "bag" ? [[t("pd.pack"), t("pd.packBag")]] : []),
                     [t("pd.price"), `${money(price)} · ${t("shop.vat")}`],
                   ].map(([k, v]) => (
-                    <div key={String(k)} className="grid grid-cols-[8rem_1fr] gap-4 px-5 py-3.5">
+                    <div key={String(k)} className="grid grid-cols-[6.5rem_1fr] gap-3 px-4 py-3.5 sm:grid-cols-[8rem_1fr] sm:gap-4 sm:px-5">
                       <dt className="text-sm text-muted-foreground">{k}</dt>
                       <dd className="font-medium">{v}</dd>
                     </div>

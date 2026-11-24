@@ -78,10 +78,10 @@ export function CoffeeGuideSection({ p }: { p: Product }) {
                 <h3 className="mt-6 font-bold">{t("rc.pours")}</h3>
                 <ol className="mt-3 grid gap-2">
                   {r.pours.map((s, i) => (
-                    <li key={s.at} className="flex items-center gap-4 rounded-xl border px-4 py-3">
+                    <li key={s.at} className="flex flex-wrap items-center gap-x-4 gap-y-1 rounded-xl border px-4 py-3">
                       <span className="w-12 font-bold tabular-nums" dir="ltr">{s.at}</span>
-                      <span className="flex-1 text-sm">{i === 0 ? t("rc.bloom") : t("rc.pourTo")}</span>
-                      <span className="font-extrabold tabular-nums">{t("rc.ml", { x: num(s.total) })}</span>
+                      <span className="order-last basis-full text-sm sm:order-none sm:basis-auto sm:flex-1">{i === 0 ? t("rc.bloom") : t("rc.pourTo")}</span>
+                      <span className="ms-auto font-extrabold tabular-nums sm:ms-0">{t("rc.ml", { x: num(s.total) })}</span>
                     </li>
                   ))}
                 </ol>
