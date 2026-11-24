@@ -52,7 +52,9 @@ export function Header() {
     cn(buttonVariants({ variant: "ghost" }), "h-10 rounded-full px-4 text-[15px]", isActive && "bg-foreground text-background hover:bg-foreground hover:text-background");
 
   return (
-    <header className="sticky top-0 z-50 h-18">
+    // solid at the top of the page: the footer waits behind the page (curtain reveal), and a
+    // transparent bar would let it show through; once scrolled, the page itself fills this space
+    <header className={cn("sticky top-0 z-50 h-18", !scrolled && "bg-background")}>
       <div
         className={cn(
           "mx-auto flex h-18 w-[min(1200px,100%-32px)] items-center border border-transparent md:transition-all md:duration-300 md:ease-out",
