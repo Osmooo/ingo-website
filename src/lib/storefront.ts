@@ -46,8 +46,8 @@ export interface Announcement extends Dated {
 
 export const announcement: Announcement[] = [
   { text: { ar: "شحن مجاني للطلبات فوق {shipping}", en: "Free shipping on orders over {shipping}" }, link: "/shop" },
-  { text: { ar: "قسّم طلبك على ٤ دفعات مع تابي وتمارا", en: "Split your order into 4 payments with Tabby or Tamara" } },
-  { text: { ar: "التوصيل خلال ٢–٥ أيام عمل", en: "Delivery in 2–5 working days" } },
+  { text: { ar: "قسّم طلبك على 4 دفعات مع تابي وتمارا", en: "Split your order into 4 payments with Tabby or Tamara" } },
+  { text: { ar: "التوصيل خلال 2–5 أيام عمل", en: "Delivery in 2–5 working days" } },
 ];
 
 /* ---------------- shop banner slider ---------------- */
@@ -89,7 +89,7 @@ export const slides: Slide[] = [
   {
     id: "bnpl",
     eyebrow: { ar: "ادفع براحتك", en: "Pay your way" },
-    title: { ar: "قسّمها على ٤ دفعات بدون فوائد", en: "Split it into 4 interest-free payments" },
+    title: { ar: "قسّمها على 4 دفعات بدون فوائد", en: "Split it into 4 interest-free payments" },
     body: { ar: "مع تابي وتمارا، أو ادفع بمدى وApple Pay وفيزا.", en: "With Tabby or Tamara, or pay with mada, Apple Pay and Visa." },
     cta: { label: { ar: "ابدأ التسوق", en: "Start shopping" }, to: "/shop#products" },
     art: "bags",
@@ -121,7 +121,7 @@ export interface OfferBanner extends Dated {
 export const offerBanner: OfferBanner = {
   eyebrow: { ar: "محتار في الحجم؟", en: "Not sure which size?" },
   title: { ar: "جرّب الأحجام الثلاثة", en: "Try all three sizes" },
-  body: { ar: "اختر ٢٥٠ جم للتجربة، و٥٠٠ جم أو ١ كجم للي يشرب كل يوم.", en: "Pick 250g to try it, or 500g or 1kg if you drink it every day." },
+  body: { ar: "اختر 250 جم للتجربة، و500 جم أو 1 كجم للي يشرب كل يوم.", en: "Pick 250g to try it, or 500g or 1kg if you drink it every day." },
   cta: { label: { ar: "اختر حجمك", en: "Pick your size" }, to: "/shop?cat=beans#products" },
   image: asset("img/roastery/green-beans.webp"),
 };
@@ -133,8 +133,8 @@ export type ValueIcon = "roast" | "saudi" | "truck" | "split" | "secure";
 export const values: { icon: ValueIcon; title: Text; body: Text }[] = [
   { icon: "roast", title: { ar: "نحمّص بأنفسنا", en: "Roasted in-house" }, body: { ar: "في محمصة إن قو", en: "At the INGO roastery" } },
   { icon: "saudi", title: { ar: "صناعة سعودية", en: "Saudi made" }, body: { ar: "علامة قهوة سعودية", en: "A Saudi coffee brand" } },
-  { icon: "truck", title: { ar: "توصيل ٢–٥ أيام عمل", en: "Delivery in 2–5 days" }, body: { ar: "لجميع مناطق المملكة", en: "Across Saudi Arabia" } },
-  { icon: "split", title: { ar: "٤ دفعات بدون فوائد", en: "4 interest-free payments" }, body: { ar: "مع تابي وتمارا", en: "With Tabby and Tamara" } },
+  { icon: "truck", title: { ar: "توصيل 2–5 أيام عمل", en: "Delivery in 2–5 days" }, body: { ar: "لجميع مناطق المملكة", en: "Across Saudi Arabia" } },
+  { icon: "split", title: { ar: "4 دفعات بدون فوائد", en: "4 interest-free payments" }, body: { ar: "مع تابي وتمارا", en: "With Tabby and Tamara" } },
   { icon: "secure", title: { ar: "دفع آمن", en: "Secure payment" }, body: { ar: "مدى، Apple Pay، فيزا", en: "mada, Apple Pay, Visa" } },
 ];
 

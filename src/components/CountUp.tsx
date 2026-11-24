@@ -16,8 +16,6 @@ interface CountUpProps {
   startWhen?: boolean;
   separator?: string;
   prefix?: string;
-  /** render digits as Arabic-Indic (٠١٢…) for Arabic pages */
-  arabicDigits?: boolean;
   suffix?: string;
   mode?: 'count' | 'roll';
   easing?: Easing;
@@ -191,7 +189,6 @@ export default function CountUp({
   separator = '',
   prefix = '',
   suffix = '',
-  arabicDigits = false,
   mode = 'count',
   easing = 'easeOut',
   decimals,
@@ -222,10 +219,9 @@ export default function CountUp({
       const { size, label, digits } = scaleFor(latest, compact, decimals, places);
       const parts = splitNumber(latest, digits, size);
       const body = `${parts.negative ? '-' : ''}${group(parts.int, separator)}${parts.frac ? `.${parts.frac}` : ''}`;
-      const text = `${prefix}${body}${label}${suffix}`;
-      return arabicDigits ? text.replace(/\d/g, (d) => "٠١٢٣٤٥٦٧٨٩"[Number(d)]) : text;
+      return `${prefix}${body}${label}${suffix}`;
     },
-    [compact, decimals, places, separator, prefix, suffix, arabicDigits]
+    [compact, decimals, places, separator, prefix, suffix]
   );
 
   const model = useMemo(() => {

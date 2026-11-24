@@ -149,8 +149,8 @@ export default function Business() {
         <div className="container-ingo grid gap-px py-2 sm:grid-cols-2 lg:grid-cols-[auto_1fr_1fr_1fr_1fr] lg:items-center">
           <h2 className="py-6 text-4xl sm:col-span-2 lg:col-span-1 lg:pe-10"><Display text={t("biz.why")} /></h2>
           {[
-            { icon: Timer, stat: <CountUp to={30} duration={1.6} prefix={lang === "ar" ? "أقل من " : "< "} suffix={lang === "ar" ? " ثانية" : "s"} arabicDigits={lang === "ar"} />, head: t("biz.w1.t"), b: t("biz.w1.b") },
-            { icon: CupSoda, stat: <CountUp to={10} duration={1.6} prefix={lang === "ar" ? "أكثر من " : ""} suffix={lang === "ar" ? "" : "+"} arabicDigits={lang === "ar"} />, head: t("biz.w2.t"), b: t("biz.w2.b") },
+            { icon: Timer, stat: <CountUp to={30} duration={1.6} prefix={lang === "ar" ? "أقل من " : "< "} suffix={lang === "ar" ? " ثانية" : "s"} />, head: t("biz.w1.t"), b: t("biz.w1.b") },
+            { icon: CupSoda, stat: <CountUp to={10} duration={1.6} prefix={lang === "ar" ? "أكثر من " : ""} suffix={lang === "ar" ? "" : "+"} />, head: t("biz.w2.t"), b: t("biz.w2.b") },
             { icon: Droplets, stat: null, head: t("biz.w3.t"), b: t("biz.w3.b") },
             { icon: Settings, stat: null, head: t("biz.w4.t"), b: t("biz.w4.b") },
           ].map(({ icon: Icon, stat, head, b }, i) => (

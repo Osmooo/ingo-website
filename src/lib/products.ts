@@ -68,7 +68,7 @@ export const PRODUCTS: Product[] = [
     name: { ar: "قهوة مختصة سريعة", en: "Instant Specialty" },
     tagline: { ar: "سريعة التحضير", en: "Instant" },
     lines: { ar: ["قهوة مختصة", "سريعة"], en: ["Instant", "Specialty"] },
-    notes: { ar: "١٠ أعواد · ماء حار أو بارد", en: "10 sticks · hot or cold water" },
+    notes: { ar: "10 أعواد · ماء حار أو بارد", en: "10 sticks · hot or cold water" },
     description: {
       ar: "قهوة مختصة في عود واحد. أضف الماء الحار أو البارد وقهوتك جاهزة في ثوانٍ.",
       en: "Specialty coffee in a single stick. Add hot or cold water and it's ready in seconds.",
@@ -80,7 +80,7 @@ export const PRODUCTS: Product[] = [
     name: { ar: "أكياس التقطير", en: "Drip Bags" },
     tagline: { ar: "أكياس تقطير", en: "Drip bags" },
     lines: { ar: ["أكياس", "التقطير"], en: ["Drip", "Bags"] },
-    notes: { ar: "١٠ أكياس · بدون أدوات", en: "10 bags · no gear needed" },
+    notes: { ar: "10 أكياس · بدون أدوات", en: "10 bags · no gear needed" },
     description: {
       ar: "كوب قهوة مقطرة مختصة بدون أي أدوات. علّق الكيس على الكوب واسكب الماء.",
       en: "A specialty pour-over cup without any gear. Hang the bag on your cup and pour.",
@@ -92,7 +92,7 @@ export const PRODUCTS: Product[] = [
     name: { ar: "قهوة عربية سريعة", en: "Instant Arabic Coffee" },
     tagline: { ar: "قهوة عربية", en: "Arabic coffee" },
     lines: { ar: ["قهوة عربية", "سريعة"], en: ["Arabic", "Coffee"] },
-    notes: { ar: "١٠ أعواد · هيل وزعفران", en: "10 sticks · cardamom & saffron" },
+    notes: { ar: "10 أعواد · هيل وزعفران", en: "10 sticks · cardamom & saffron" },
     description: {
       ar: "قهوتنا العربية بالهيل والزعفران، جاهزة في أعواد تحضّرها بسرعة للضيوف.",
       en: "Our Arabic coffee with cardamom and saffron, in sticks you can make quickly for guests.",

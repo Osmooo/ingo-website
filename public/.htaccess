@@ -1,21 +1,22 @@
-# Hostinger (LiteSpeed / Apache): the site is a single-page app, so any address that isn't a real
-# file (/shop, /business, /shop/signature…) is answered with index.html and the app shows the page.
-# GitHub Pages ignores this file.
+# Hostinger (LiteSpeed / Apache). Every real page is built as its own folder with an index.html
+# (/shop/, /business/, /shop/signature/…), so the server finds them directly. Unknown addresses get
+# the app's 404 page with a real 404 status, which search engines need. GitHub Pages ignores this file.
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  RewriteBase /
-  RewriteRule ^index\.html$ - [L]
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /index.html [L]
+  # always use https
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 </IfModule>
 
-# keep the built files cached; the page itself is always re-checked so updates show straight away
+# keep the built files cached; pages are always re-checked so updates show straight away
 <IfModule mod_headers.c>
   <FilesMatch "\.(js|css|woff2|otf|webp|svg|png|jpg)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
-  <FilesMatch "\.html$">
+  <FilesMatch "\.(html|xml|txt)$">
     Header set Cache-Control "no-cache"
   </FilesMatch>
 </IfModule>

@@ -29,8 +29,8 @@ jobs:
       - run: npm run build
         env:
           BASE_PATH: /${{ github.event.repository.name }}/
-      # GitHub Pages has no server routing: give every real page its own copy (served as 200), 404.html for the rest
-      - run: node scripts/spa-routes.mjs
+          # public address used for canonical links, sitemap and social previews
+          SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

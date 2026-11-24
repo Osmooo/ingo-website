@@ -40,7 +40,7 @@ const DICT = {
   "foot.about": ["إن قو علامة قهوة سعودية: حبوب مختصة، ومنتجات سريعة التحضير، ومكائن خدمة ذاتية للمتاجر.", "INGO is a Saudi coffee brand selling specialty beans, instant products and self-service machines for stores."],
   "foot.explore": ["استكشف", "Explore"],
   "foot.contact": ["تواصل معنا", "Contact"],
-  "foot.rights": ["© ٢٠٢٦ إن قو. جميع الحقوق محفوظة.", "© 2026 INGO. All rights reserved."],
+  "foot.rights": ["© 2026 إن قو. جميع الحقوق محفوظة.", "© 2026 INGO. All rights reserved."],
 
   "shop.eyebrow": ["متجر إن قو", "INGO store"],
   "shop.title": ["قهوتك،|توصلك لين بـــابك", "Your coffee,|delivered"],
@@ -68,7 +68,7 @@ const DICT = {
   "cart.less": ["إنقاص الكمية", "Decrease quantity"],
   "cart.more": ["زيادة الكمية", "Increase quantity"],
 
-  "ship.time": ["التوصيل خلال ٢–٥ أيام عمل", "Delivery in 2–5 working days"],
+  "ship.time": ["التوصيل خلال 2–5 أيام عمل", "Delivery in 2–5 working days"],
   "pay.accepted": ["طرق الدفع المتاحة", "We accept"],
   "co.name": ["الاسم الكامل", "Full name"],
   "co.phone": ["رقم الجوال", "Mobile number"],
@@ -78,12 +78,12 @@ const DICT = {
 
   "biz.eyebrow": ["إن قو للأعمال", "INGO for business"],
   "biz.title": ["ماكينة إن قو|في متجـــرك", "An INGO machine|in your store"],
-  "biz.sub": ["خذ ماكينة إن قو مجاناً بعقد إعارة ٦ أو ١٢ شهراً. تبقى الماكينة ملكاً لإن قو والصيانة مجانية، وتشتري المواد من إن قو على قدر استهلاكك بدون حد أدنى. وإذا تبغى تملكها، سعرها ٢٬٥٠٠ ⃁ شامل الضريبة مع ضمان سنتين. التوصيل والتركيب مجاني في الرياض وجدة والدمام والمدينة المنورة.", "Get an INGO machine free on a 6- or 12-month loan. The machine stays INGO's property, maintenance is free, and you buy supplies from INGO as you use them, with no minimum. If you'd rather own it, it costs ⃁ 2,500 including VAT and comes with a 2-year warranty. Delivery and installation are free in Riyadh, Jeddah, Dammam and Madinah."],
+  "biz.sub": ["خذ ماكينة إن قو مجاناً بعقد إعارة 6 أو 12 شهراً. تبقى الماكينة ملكاً لإن قو والصيانة مجانية، وتشتري المواد من إن قو على قدر استهلاكك بدون حد أدنى. وإذا تبغى تملكها، سعرها 2,500 ⃁ شامل الضريبة مع ضمان سنتين. التوصيل والتركيب مجاني في الرياض وجدة والدمام والمدينة المنورة.", "Get an INGO machine free on a 6- or 12-month loan. The machine stays INGO's property, maintenance is free, and you buy supplies from INGO as you use them, with no minimum. If you'd rather own it, it costs ⃁ 2,500 including VAT and comes with a 2-year warranty. Delivery and installation are free in Riyadh, Jeddah, Dammam and Madinah."],
   "biz.brochure": ["عرض الكتيب", "View brochure"],
   "biz.brochureSub": ["كل تفاصيل الماكينة في صفحة واحدة", "Everything about the machine on one page"],
   "biz.drinks": ["نكهات", "flavours"],
-  "biz.badge.time": ["أقل من ٣٠ ثانية", "< 30s"],
-  "biz.badge.drinks": ["أكثر من ١٠", "10+"],
+  "biz.badge.time": ["أقل من 30 ثانية", "< 30s"],
+  "biz.badge.drinks": ["أكثر من 10", "10+"],
   "biz.machineAlt": ["ماكينة قهوة إن قو بالخدمة الذاتية", "INGO self-service coffee machine"],
 
   "biz.feat.title": ["ماكينة تشتغل|لصالح متجـــرك", "A machine that works|for your store"],
@@ -118,12 +118,12 @@ const DICT = {
   "biz.st3.t": ["التركيب", "Installation"], "biz.st3.b": ["نوصل الماكينة ونركّبها مجاناً في الرياض وجدة والدمام والمدينة المنورة، وفي باقي المدن نتفق معك على التفاصيل.", "We deliver and install the machine free in Riyadh, Jeddah, Dammam and Madinah; for other cities we agree the details with you."],
   "biz.st4.t": ["ابدأ التقديم", "Start serving"], "biz.st4.b": ["تقدّم المشروبات لعملائك وتطلب المواد حسب استهلاكك بدون حد أدنى، والصيانة مجانية بعقد الإعارة.", "You serve drinks and order supplies as you use them, with no minimum; maintenance is free on the loan contract."],
   "biz.ben": ["وش|تستفيـــد؟", "What|you get"],
-  "biz.ben1": ["ماكينة مجانية بعقد إعارة ٦ أو ١٢ شهراً", "A free machine on a 6- or 12-month loan"],
+  "biz.ben1": ["ماكينة مجانية بعقد إعارة 6 أو 12 شهراً", "A free machine on a 6- or 12-month loan"],
   "biz.ben2": ["صيانة مجانية ضمن عقد الإعارة", "Free maintenance under the loan contract"],
   "biz.ben3": ["تشتري المواد من إن قو على قدر استهلاكك، بدون حد أدنى", "Buy supplies from INGO as you use them, with no minimum"],
   "biz.ben4": ["توصيل وتركيب مجاني في الرياض وجدة والدمام والمدينة المنورة", "Free delivery and installation in Riyadh, Jeddah, Dammam and Madinah"],
-  "biz.ben5": ["تبغى تملكها؟ سعرها ٢٬٥٠٠ ⃁ شامل الضريبة مع ضمان سنتين", "Want to own it? It costs ⃁ 2,500 incl. VAT, with a 2-year warranty"],
-  "biz.ben6": ["مشروبين تختارهم من أكثر من ١٠ نكهات", "Two drinks, picked from 10+ flavours"],
+  "biz.ben5": ["تبغى تملكها؟ سعرها 2,500 ⃁ شامل الضريبة مع ضمان سنتين", "Want to own it? It costs ⃁ 2,500 incl. VAT, with a 2-year warranty"],
+  "biz.ben6": ["مشروبين تختارهم من أكثر من 10 نكهات", "Two drinks, picked from 10+ flavours"],
   "biz.direct": ["تفضّل التواصل مباشرة؟", "Prefer to talk directly?"],
   "biz.formT": ["نموذج|التسجيـــل", "Registration|form"],
   "biz.formB": ["يستغرق دقائق. الحقول المعلّمة بـ * مطلوبة، وبعد الإرسال يتواصل معك فريق إن قو لمناقشة مناسبة موقعك.", "Takes a few minutes. Fields marked * are required; after you send it, the INGO team will contact you to discuss your location."],
@@ -149,12 +149,12 @@ const DICT = {
   "biz.start": ["متى تبغى تبدأ؟", "When would you like to start?"],
   "biz.start.now": ["في أقرب وقت", "As soon as possible"],
   "biz.start.month": ["خلال شهر", "Within a month"],
-  "biz.start.later": ["خلال ١–٣ أشهر", "In 1–3 months"],
+  "biz.start.later": ["خلال 1–3 أشهر", "In 1–3 months"],
   "biz.start.unsure": ["لم أحدد بعد", "Not decided yet"],
   "biz.arr": ["الخيار المفضّل", "Preferred option"],
-  "biz.arr.loan": ["إعارة مجانية ١٢ شهراً", "Free loan, 12 months"],
-  "biz.arr.loan6": ["إعارة مجانية ٦ أشهر", "Free loan, 6 months"],
-  "biz.arr.buy": ["شراء الماكينة (٢٬٥٠٠ ⃁ شامل الضريبة)", "Buy it (⃁ 2,500 incl. VAT)"],
+  "biz.arr.loan": ["إعارة مجانية 12 شهراً", "Free loan, 12 months"],
+  "biz.arr.loan6": ["إعارة مجانية 6 أشهر", "Free loan, 6 months"],
+  "biz.arr.buy": ["شراء الماكينة (2,500 ⃁ شامل الضريبة)", "Buy it (⃁ 2,500 incl. VAT)"],
   "biz.arr.unsure": ["غير متأكد", "Not sure yet"],
   "biz.bev": ["المشروبات المطلوبة", "Preferred drinks"],
   "biz.bev.unsure": ["غير متأكد", "Not sure yet"],
@@ -169,7 +169,7 @@ const DICT = {
   "biz.power": ["يوجد فيش كهرباء قريب؟", "Power outlet nearby?"],
   "biz.yes": ["نعم", "Yes"], "biz.no": ["لا", "No"], "biz.unsure": ["غير متأكد", "Not sure"],
   "biz.hours": ["ساعات العمل", "Opening hours"],
-  "biz.h24": ["٢٤ ساعة", "24 hours"], "biz.hday": ["نهاري", "Daytime"], "biz.hlate": ["لين آخر الليل", "Until late"],
+  "biz.h24": ["24 ساعة", "24 hours"], "biz.hday": ["نهاري", "Daytime"], "biz.hlate": ["لين آخر الليل", "Until late"],
   "biz.city": ["المدينة", "City"],
   "biz.district": ["الحي", "District"],
   "biz.maps": ["رابط الموقع على قوقل ماب", "Google Maps link"],
@@ -184,7 +184,7 @@ const DICT = {
   "biz.q1": ["من يملك الماكينة؟", "Who owns the machine?"],
   "biz.a1": ["بعقد الإعارة المجانية تبقى الماكينة ملكاً لإن قو. وإذا اخترت الشراء، تصير الماكينة ملكك.", "On the free-loan contract the machine stays INGO's property. If you choose to buy it, the machine is yours."],
   "biz.q2": ["هل لازم أشتري الماكينة؟", "Do I have to buy the machine?"],
-  "biz.a2": ["لا. تقدر تاخذها مجاناً بعقد إعارة ٦ أو ١٢ شهراً، أو تشتريها بـ ٢٬٥٠٠ ⃁ شامل الضريبة مع ضمان سنتين.", "No. You can have it free on a 6- or 12-month loan, or buy it for ⃁ 2,500 including VAT, with a 2-year warranty."],
+  "biz.a2": ["لا. تقدر تاخذها مجاناً بعقد إعارة 6 أو 12 شهراً، أو تشتريها بـ 2,500 ⃁ شامل الضريبة مع ضمان سنتين.", "No. You can have it free on a 6- or 12-month loan, or buy it for ⃁ 2,500 including VAT, with a 2-year warranty."],
   "biz.q3": ["كيف يتم شراء المواد؟", "How do supplies work?"],
   "biz.a3": ["بعقد الإعارة تشتري مواد الماكينة من إن قو مباشرة حسب استهلاكك. وإذا اشتريت الماكينة، تقدر تشتري المواد من أي مكان.", "On the loan contract you buy the machine's supplies directly from INGO as you use them. If you buy the machine, you can buy supplies anywhere."],
   "biz.q4": ["هل فيه حد أدنى للشراء؟", "Is there a minimum purchase?"],
@@ -200,7 +200,7 @@ const DICT = {
   "biz.q9": ["كم مساحة تحتاج، وهل تحتاج كهرباء؟", "How much space and power does it need?"],
   "biz.a9": ["تصميمها مدمج وحجمها صغير يناسب أغلب المساحات، وتحتاج مكاناً قريباً من فيش كهرباء. النموذج يسألك عن المساحة والكهرباء المتوفرة.", "It has a compact design that fits most spaces and needs a spot near a power outlet. The form asks about your available space and power."],
   "biz.q10": ["وش المشروبات وكم ياخذ الكوب؟", "Which drinks, and how fast?"],
-  "biz.a10": ["الماكينة تقدّم مشروبين، تختارهم من أكثر من ١٠ نكهات، وكل كوب يجهز في أقل من ٣٠ ثانية.", "The machine serves two drinks, which you pick from 10+ flavours, and each cup is ready in under 30 seconds."],
+  "biz.a10": ["الماكينة تقدّم مشروبين، تختارهم من أكثر من 10 نكهات، وكل كوب يجهز في أقل من 30 ثانية.", "The machine serves two drinks, which you pick from 10+ flavours, and each cup is ready in under 30 seconds."],
   "biz.q11": ["مو متأكد وش يناسب منشأتي؟", "Not sure what suits my business?"],
   "biz.a11": ["اختر «غير متأكد» في النموذج، ويناقش معك فريق إن قو المشروبات والموقع المناسبين لنشاطك.", "Choose \"Not sure\" in the form, and the INGO team will talk through the right drinks and spot for your business."],
   "biz.q12": ["عندي أكثر من فرع، هل أقدر أسجّل؟", "I have more than one branch. Can I register?"],
@@ -208,9 +208,9 @@ const DICT = {
   "biz.q13": ["هل توصلون لمدينتي؟", "Do you deliver to my city?"],
   "biz.a13": ["نعم، نوصل لجميع مناطق المملكة. التوصيل والتركيب مجاني في الرياض وجدة والدمام والمدينة المنورة، وباقي المدن نتفق عليها معك.", "Yes, we deliver across Saudi Arabia. Delivery and installation are free in Riyadh, Jeddah, Dammam and Madinah; other cities are agreed with you."],
   "biz.q14": ["وش الفرق بين الإعارة والشراء؟", "What's the difference between loan and purchase?"],
-  "biz.a14": ["الإعارة: الماكينة مجانية لمدة ٦ أو ١٢ شهراً وتبقى ملكاً لإن قو، والصيانة مجانية، وتشتري المواد من إن قو بدون حد أدنى. الشراء: تدفع ٢٬٥٠٠ ⃁ شامل الضريبة، وتصير الماكينة ملكك مع ضمان سنتين، وتشتري المواد من أي مكان.", "Loan: the machine is free for 6 or 12 months and stays INGO's, maintenance is free, and you buy supplies from INGO with no minimum. Purchase: you pay ⃁ 2,500 incl. VAT, the machine is yours with a 2-year warranty, and you can buy supplies anywhere."],
+  "biz.a14": ["الإعارة: الماكينة مجانية لمدة 6 أو 12 شهراً وتبقى ملكاً لإن قو، والصيانة مجانية، وتشتري المواد من إن قو بدون حد أدنى. الشراء: تدفع 2,500 ⃁ شامل الضريبة، وتصير الماكينة ملكك مع ضمان سنتين، وتشتري المواد من أي مكان.", "Loan: the machine is free for 6 or 12 months and stays INGO's, maintenance is free, and you buy supplies from INGO with no minimum. Purchase: you pay ⃁ 2,500 incl. VAT, the machine is yours with a 2-year warranty, and you can buy supplies anywhere."],
   "biz.q15": ["كم مدة عقد الإعارة؟", "How long is the loan contract?"],
-  "biz.a15": ["عقد الإعارة لمدة ٦ أشهر أو ١٢ شهراً، وتختار المدة المناسبة لك في النموذج.", "The loan contract runs for 6 or 12 months; you choose the length that suits you in the form."],
+  "biz.a15": ["عقد الإعارة لمدة 6 أشهر أو 12 شهراً، وتختار المدة المناسبة لك في النموذج.", "The loan contract runs for 6 or 12 months; you choose the length that suits you in the form."],
   "biz.q16": ["إذا اشتريت الماكينة، لازم أشتري المواد منكم؟", "If I buy the machine, must I buy supplies from you?"],
   "biz.a16": ["لا. إذا اشتريت الماكينة تقدر تشتري المواد من أي مكان، وعليها ضمان سنتين.", "No. If you buy the machine you can buy supplies anywhere, and it has a 2-year warranty."],
 
@@ -287,7 +287,7 @@ const DICT = {
   "ck.err.number": ["رقم البطاقة غير صحيح", "This card number isn't valid"],
   "ck.err.name": ["اكتب الاسم الأول والأخير بالإنجليزي", "Enter a first and last name in English letters"],
   "ck.err.exp": ["تاريخ الانتهاء غير صحيح أو منتهي", "This expiry date isn't valid or has passed"],
-  "ck.err.cvc": ["رمز الأمان من ٣ أو ٤ أرقام", "The security code is 3 or 4 digits"],
+  "ck.err.cvc": ["رمز الأمان من 3 أو 4 أرقام", "The security code is 3 or 4 digits"],
   "ck.pay": ["ادفع {x}", "Pay {x}"],
   "ck.paying": ["جاري الدفع…", "Processing…"],
   "ck.secure": ["بيانات بطاقتك تنتقل مشفّرة مباشرة إلى بوابة الدفع Moyasar، وما نحفظها عندنا.", "Your card details go encrypted straight to the Moyasar payment gateway. We don't store them."],
@@ -298,7 +298,7 @@ const DICT = {
   "ck.failed": ["ما تم الدفع", "Payment didn't go through"],
   "ck.cancelled": ["تم إلغاء الدفع", "Payment cancelled"],
   "res.paidT": ["تم الدفع واستلمنا طلبك", "Payment received, order placed"],
-  "res.paidB": ["شكراً لك. يوصلك طلبك خلال ٢–٥ أيام عمل، وبيتواصل معك فريقنا لتأكيد التوصيل.", "Thank you. Your order arrives in 2–5 working days, and our team will contact you to confirm delivery."],
+  "res.paidB": ["شكراً لك. يوصلك طلبك خلال 2–5 أيام عمل، وبيتواصل معك فريقنا لتأكيد التوصيل.", "Thank you. Your order arrives in 2–5 working days, and our team will contact you to confirm delivery."],
   "res.ref": ["رقم الطلب", "Order number"],
   "res.pay": ["رقم العملية", "Payment reference"],
   "res.failB": ["تقدر تحاول مرة ثانية أو تختار طريقة دفع ثانية. سلتك محفوظة.", "You can try again or choose another payment method. Your cart is saved."],
@@ -307,9 +307,9 @@ const DICT = {
   "res.pendingB": ["ما وصلنا تأكيد الدفع للحين. إذا انخصم المبلغ، تواصل معنا وأعطنا رقم العملية.", "We haven't received payment confirmation yet. If you were charged, contact us with the payment reference."],
   "bnpl.tabby": ["تابي", "Tabby"],
   "bnpl.tamara": ["تمارا", "Tamara"],
-  "bnpl.split4": ["٤ دفعات بدون فوائد", "4 interest-free payments"],
-  "bnpl.note": ["أو ٤ دفعات بقيمة {x} بدون فوائد مع", "Or 4 interest-free payments of {x} with"],
-  "bnpl.title": ["قسّمها على ٤ دفعات مع {x}", "Split it into 4 payments with {x}"],
+  "bnpl.split4": ["4 دفعات بدون فوائد", "4 interest-free payments"],
+  "bnpl.note": ["أو 4 دفعات بقيمة {x} بدون فوائد مع", "Or 4 interest-free payments of {x} with"],
+  "bnpl.title": ["قسّمها على 4 دفعات مع {x}", "Split it into 4 payments with {x}"],
   "bnpl.body": ["تكمل الدفع في صفحة {x}، وتوافق {x} على الطلب حسب شروطها.", "You'll finish on {x}'s page, and {x} approves the order under its own terms."],
   "bnpl.continue": ["متابعة مع {x}", "Continue with {x}"],
   "bnpl.off": ["الدفع بالتقسيط مع {x} غير مفعّل بعد في المتجر.", "Paying in instalments with {x} isn't switched on for this store yet."],
@@ -332,15 +332,15 @@ const DICT = {
   "foot.vat": ["الرقم الضريبي", "VAT no."],
   "foot.cr": ["السجل التجاري", "CR no."],
   "foot.whatsapp": ["واتساب", "WhatsApp"],
-  "biz.drinks.eyebrow": ["ماكينة ٢ مشروب من إن قو", "The INGO 2-drink machine"],
+  "biz.drinks.eyebrow": ["ماكينة 2 مشروب من إن قو", "The INGO 2-drink machine"],
   "biz.drinks.title": ["اختر مشروبين|لماكينتك", "Pick two drinks|for your machine"],
-  "biz.drinks.sub": ["أكثر من ١٠ نكهات، منها هذي. اختر اثنين:", "More than 10 flavours, including these. Pick two:"],
-  "biz.drinks.count": ["اخترت {x} من ٢", "{x} of 2 picked"],
+  "biz.drinks.sub": ["أكثر من 10 نكهات، منها هذي. اختر اثنين:", "More than 10 flavours, including these. Pick two:"],
+  "biz.drinks.count": ["اخترت {x} من 2", "{x} of 2 picked"],
   "biz.drinks.full": ["اخترت مشروبين. لتغيير واحد، ألغِ اختياره أول.", "You have picked two. To swap one, untick it first."],
   "biz.drinks.empty": ["اختر مشروب", "Pick a drink"],
   "biz.drinks.cta": ["سجّل بهذين المشروبين", "Register with these two drinks"],
   "biz.drink.screen": ["على الماكينة", "On the machine"],
-  "flv.3in1": ["قهوة ٣ في ١", "3-in-1 coffee"],
+  "flv.3in1": ["قهوة 3 في 1", "3-in-1 coffee"],
   "flv.karak": ["شاي كرك بالهيل", "Karak tea with cardamom"],
   "flv.karakLow": ["شاي كرك قليل السكر", "Low-sugar karak tea"],
   "flv.espresso": ["إسبريسو فوري", "Instant espresso"],
@@ -371,13 +371,13 @@ interface I18n {
   t: (key: DictKey, vars?: Record<string, string>) => string;
   L: (text: Text) => string;
   money: (n: number) => string;
-  /** size label for display: 250g → ٢٥٠ جم in Arabic; raw values stay for data */
+  /** size label for display: 250g → 250 جم in Arabic; raw values stay for data */
   sz: (w: string) => string;
-  /** correctly pluralised count, e.g. ar: منتج واحد / منتجان / ٣ منتجات / ١١ منتجاً */
+  /** correctly pluralised count, e.g. ar: منتج واحد / منتجان / 3 منتجات / 11 منتجاً */
   count: (n: number, unit: "product" | "piece") => string;
   /** a bare number in the page's digits (Arabic-Indic in Arabic) */
   num: (n: number) => string;
-  /** form range labels: "100-300" → ١٠٠–٣٠٠, "< 1 m²" → أقل من ١ م², "600+" → أكثر من ٦٠٠ */
+  /** form range labels: "100-300" → 100–300, "< 1 m²" → أقل من 1 م², "600+" → أكثر من 600 */
   range: (v: string) => string;
   toggle: () => void;
   setLang: (l: Lang) => void;
@@ -407,7 +407,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo<I18n>(() => {
     const i = lang === "ar" ? 0 : 1;
-    const nf = new Intl.NumberFormat(lang === "ar" ? "ar-SA" : "en-US");
+    const nf = new Intl.NumberFormat(lang === "ar" ? "ar-SA-u-nu-latn" : "en-US"); // 123 digits in both languages
     return {
       lang, dir, toggle, setLang,
       t: (key, vars) => {
@@ -421,7 +421,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
         if (lang === "en") return w === "10×" ? "10 pcs" : w;
         const m = /^(\d+)(g|kg)$/.exec(w);
         if (m) return `${nf.format(Number(m[1]))} ${m[2] === "g" ? "جم" : "كجم"}`;
-        return w === "10×" ? "١٠ قطع" : w;
+        return w === "10×" ? "10 قطع" : w;
       },
       count: (n, unit) => {
         if (lang === "en") return `${n} ${unit}${n === 1 ? "" : "s"}`;
