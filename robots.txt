@@ -1,0 +1,6 @@
+# Everyone may crawl the site, including AI search crawlers (OAI-SearchBot, Claude-SearchBot, PerplexityBot).
+# The cart and checkout are kept out of search results with a noindex tag on the page itself.
+User-agent: *
+Allow: /
+
+Sitemap: https://ingo.sa/sitemap.xml

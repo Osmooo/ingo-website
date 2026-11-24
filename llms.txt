@@ -1,0 +1,23 @@
+# INGO (إن قو)
+
+> INGO is a Saudi coffee brand that roasts its own coffee. It sells specialty coffee beans (250g, 500g, 1kg), instant coffee sticks and drip bags to individuals, and places self-service coffee machines in baqalas, mini markets, supermarkets, restaurants and cafeterias.
+
+## Pages
+
+- [Shop](https://ingo.sa/shop/): specialty beans and instant products, delivery across Saudi Arabia in 2–5 working days. Payment: mada, Visa, Mastercard, Tabby, Tamara.
+- [How to brew a hot V60, step by step](https://ingo.sa/blog/hot-v60-recipe/): An easy V60 recipe with 20g of coffee and 300ml of water: tools, grind, water temperature and pour schedule.
+- [Iced V60: cold filter coffee in 3 minutes](https://ingo.sa/blog/iced-v60-recipe/): The iced V60 method: brew hot coffee straight onto ice so it chills instantly and keeps its flavour.
+- [Natural vs washed coffee: what's the difference?](https://ingo.sa/blog/natural-vs-washed-coffee/): Why can two coffees from the same country taste so different? How the coffee is processed after picking plays a big part.
+- [How to store coffee beans so they stay fresh](https://ingo.sa/blog/how-to-store-coffee-beans/): Coffee has four enemies: air, light, heat and moisture. Here are the easiest ways to keep your beans at their best.
+- [Bella Guji](https://ingo.sa/shop/bella-guji/): Ethiopia · Natural, Heirloom, medium body, roast 3/7. Berries · Peach · Floral. From SAR 59 incl. VAT.
+- [Santa Ana](https://ingo.sa/shop/santa-ana/): El Salvador · Washed, Mixed varieties, medium body, roast 4/7. Chocolate · Red berry · Hazelnut. From SAR 49 incl. VAT.
+- [Black Mountain](https://ingo.sa/shop/black-mountain/): Brazil · Natural, Mogiana, rich body, roast 4/7. Nuts · Dark chocolate · Hazelnut. From SAR 45 incl. VAT.
+- [Instant Specialty](https://ingo.sa/shop/instant/): Instant. 10 sticks · hot or cold water. From SAR 39 incl. VAT.
+- [Drip Bags](https://ingo.sa/shop/drip/): Drip bags. 10 bags · no gear needed. From SAR 45 incl. VAT.
+- [Instant Arabic Coffee](https://ingo.sa/shop/arabic/): Arabic coffee. 10 sticks · cardamom & saffron. From SAR 35 incl. VAT.
+- [For business](https://ingo.sa/business/): the INGO 2-drink machine, free on a 6- or 12-month loan with free maintenance; supplies bought from INGO as used, no minimum; or buy it for SAR 2,500 incl. VAT with a 2-year warranty. Two drinks picked from 10+ flavours. Free delivery and installation in Riyadh, Jeddah, Dammam and Madinah.
+
+## Contact
+
+- Email: info@ingo.sa
+- Phone: 920000384

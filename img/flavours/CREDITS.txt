@@ -1,0 +1,8 @@
+Stock photos (Unsplash License, free for commercial use). Stand-ins until INGO has its own drink photos.
+three-in-one.webp https://unsplash.com/photos/mZ0xQN2v-GU
+karak.webp https://unsplash.com/photos/Ke0BiErDX_Y
+karak-low-sugar.webp https://unsplash.com/photos/HHM4Ejj0SCE
+espresso.webp https://unsplash.com/photos/maO-qIKLqi8
+hot-chocolate.webp https://unsplash.com/photos/MjZq7A2RJxQ
+hazelnut-cappuccino.webp https://unsplash.com/photos/xlB_LnmcjXU
+vanilla-cappuccino.webp https://unsplash.com/photos/Vh_owx2ijSM
