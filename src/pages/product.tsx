@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { bagGeometry, PackArt } from "@/components/brand/pack-art";
 import { Eyebrow, SectionHeading } from "@/components/site/section-heading";
 import { ProductCard } from "@/components/store/product-card";
+import { ProductVisual, RoastScale } from "@/components/store/product-visual";
 import { RevealHeading } from "@/components/store/reveal-heading";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/lib/cart";
@@ -92,7 +93,8 @@ function ProductView({ p }: { p: Product }) {
   });
 
   const price = priceOf(p, size);
-  const isBag = p.art === "bag";
+  // the labelled zoom works on the drawn bag only; products with a real label photo show the photo
+  const isBag = p.art === "bag" && !p.image;
   const current = DETAILS.find((d) => d.id === detail)!;
   const marker = isBag && detail !== "overview" ? bagGeometry(size).points[detail] : null;
   const related = [...PRODUCTS.filter((x) => x.id !== p.id && x.cat === p.cat), ...PRODUCTS.filter((x) => x.cat !== p.cat)].slice(0, 3);
@@ -120,8 +122,8 @@ function ProductView({ p }: { p: Product }) {
             <div className="pd-in">
               <div ref={stage} className="relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-card ring-1 ring-border md:aspect-square">
                 <div ref={zoomer} className="absolute inset-0 grid place-items-center will-change-transform">
-                  <div ref={art} className="relative h-[78%]">
-                    <PackArt kind={p.art} size={isBag ? size : undefined} className="drop-shadow-[0_30px_30px_rgba(150,70,20,.28)]" />
+                  <div ref={art} className={p.image ? "absolute inset-8 flex items-center justify-center md:inset-12" : "relative h-[78%]"}>
+                    {p.image ? <ProductVisual p={p} eager className="h-auto max-h-full w-auto max-w-full" /> : <PackArt kind={p.art} size={isBag ? size : undefined} className="drop-shadow-[0_30px_30px_rgba(150,70,20,.28)]" />}
                     {marker && (
                       <span aria-hidden className="absolute size-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-card bg-flame shadow" style={{ left: `${marker.x}%`, top: `${marker.y}%` }} />
                     )}
@@ -217,13 +219,22 @@ function ProductView({ p }: { p: Product }) {
                 <dl className="divide-y rounded-2xl border bg-card">
                   {[
                     [t("pd.type"), t(p.cat === "beans" ? "shop.beans" : "shop.instant")],
-                    [t("store.cmp.use"), L(p.tagline)],
-                    [t("store.cmp.notes"), L(p.notes)],
-                    [t("store.cmp.sizes"), p.sizes.map((s) => sz(s.w)).join(" · ")],
-                    ...(isBag ? [[t("pd.pack"), t("pd.packBag")]] : []),
+                    ...(p.specs
+                      ? [
+                          [t("cof.origin"), L(p.specs.origin)],
+                          [t("cof.process"), L(p.specs.process)],
+                          [t("cof.variety"), L(p.specs.variety)],
+                          [t("cof.body"), L(p.specs.body)],
+                          [t("cof.roast"), <RoastScale level={p.specs.roast} />],
+                          [t("cof.brew"), p.specs.brew.map((b) => t(b === "filter" ? "cof.filter" : "cof.espresso")).join(" · ")],
+                        ]
+                      : [[t("pd.use"), L(p.tagline)]]),
+                    [t("pd.notes"), L(p.notes)],
+                    [t("pd.sizes"), p.sizes.map((s) => sz(s.w)).join(" · ")],
+                    ...(p.art === "bag" ? [[t("pd.pack"), t("pd.packBag")]] : []),
                     [t("pd.price"), `${money(price)} · ${t("shop.vat")}`],
                   ].map(([k, v]) => (
-                    <div key={k} className="grid grid-cols-[8rem_1fr] gap-4 px-5 py-3.5">
+                    <div key={String(k)} className="grid grid-cols-[8rem_1fr] gap-4 px-5 py-3.5">
                       <dt className="text-sm text-muted-foreground">{k}</dt>
                       <dd className="font-medium">{v}</dd>
                     </div>

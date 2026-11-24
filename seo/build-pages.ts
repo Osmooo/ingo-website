@@ -23,10 +23,18 @@ interface Page {
   index: boolean;
   type?: "website" | "product";
   jsonld?: object[];
+  image?: string; // absolute URL for og:image (defaults to the roastery photo)
 }
 
 const BRAND = "إن قو";
-const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+/** Cut a meta description at a word boundary, at most n characters. */
+const clip = (s: string, n = 160) => {
+  s = s.replace(/\s+/g, " ").trim();
+  if (s.length <= n) return s;
+  const cut = s.slice(0, n - 1);
+  return cut.slice(0, cut.lastIndexOf(" ")).replace(/[،,.:;·\s]+$/, "") + "…";
+};
+const esc =(s: string) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
 export function seoPages(): Plugin {
   return {
@@ -97,12 +105,20 @@ export function seoPages(): Plugin {
         { path: "checkout/result", title: `نتيجة الدفع | ${BRAND}`, description: "نتيجة الدفع.", index: false },
         ...PRODUCTS.map((p): Page => {
           const prices = p.sizes.map((s) => s.price);
+          const low = Math.min(...prices);
+          const sp = p.specs;
+          const image = p.image ? file(p.image) : undefined;
+          // short, specific meta description: what it is, where from, how it tastes, the price
+          const description = sp
+            ? clip(`${p.name.ar}: قهوة مختصة من ${sp.origin.ar}، ${sp.process.ar}، محمّصة في محمصة إن قو. النكهات: ${p.notes.ar}. ${sp.body.ar}. من ${low} ريال شامل الضريبة.`)
+            : clip(`${p.name.ar} من إن قو. ${p.notes.ar}. من ${low} ريال شامل الضريبة. ${p.description.ar}`);
           return {
             path: `shop/${p.id}`,
             type: "product",
             title: `${p.name.ar} – ${p.tagline.ar} | ${BRAND}`,
-            description: `${p.description.ar} ${p.notes.ar}. من ${Math.min(...prices)} ريال شامل الضريبة.`.replace(/\s+/g, " ").slice(0, 300),
+            description,
             index: true,
+            image,
             jsonld: [
               {
                 "@context": "https://schema.org",
@@ -110,6 +126,20 @@ export function seoPages(): Plugin {
                 name: p.name.ar,
                 alternateName: p.name.en,
                 description: p.description.ar,
+                sku: p.id,
+                ...(image ? { image: [image] } : {}),
+                ...(sp
+                  ? {
+                      additionalProperty: [
+                        ["بلد المنشأ", sp.origin.ar],
+                        ["طريقة المعالجة", sp.process.ar],
+                        ["السلالة", sp.variety.ar],
+                        ["القوام", sp.body.ar],
+                        ["النكهات", p.notes.ar],
+                        ["درجة التحميص", `${sp.roast} من 7`],
+                      ].map(([name, value]) => ({ "@type": "PropertyValue", name, value })),
+                    }
+                  : {}),
                 brand: { "@type": "Brand", name: "INGO" },
                 category: p.cat === "beans" ? "حبوب قهوة" : "قهوة سريعة التحضير",
                 url: url(`shop/${p.id}`),
@@ -140,7 +170,7 @@ export function seoPages(): Plugin {
           `<meta property="og:title" content="${esc(pg.title)}" />`,
           `<meta property="og:description" content="${esc(pg.description)}" />`,
           canonical ? `<meta property="og:url" content="${canonical}" />` : "",
-          `<meta property="og:image" content="${ogImage}" />`,
+          `<meta property="og:image" content="${pg.image ?? ogImage}" />`,
           `<meta property="og:locale" content="ar_SA" />`,
           `<meta property="og:locale:alternate" content="en_US" />`,
           `<meta name="twitter:card" content="summary_large_image" />`,
@@ -175,7 +205,7 @@ export function seoPages(): Plugin {
         `> INGO is a Saudi coffee brand that roasts its own coffee. It sells specialty coffee beans (250g, 500g, 1kg), instant coffee sticks and drip bags to individuals, and places self-service coffee machines in baqalas, mini markets, supermarkets, restaurants and cafeterias.\n\n` +
         `## Pages\n\n` +
         `- [Shop](${url("shop")}): specialty beans and instant products, delivery across Saudi Arabia in 2–5 working days. Payment: Apple Pay, mada, Visa, Mastercard, Tabby, Tamara.\n` +
-        PRODUCTS.map((p) => `- [${p.name.en}](${url(`shop/${p.id}`)}): ${p.tagline.en}. ${p.notes.en}. From SAR ${Math.min(...p.sizes.map((s) => s.price))} incl. VAT.\n`).join("") +
+        PRODUCTS.map((p) => `- [${p.name.en}](${url(`shop/${p.id}`)}): ${p.tagline.en}${p.specs ? `, ${p.specs.variety.en}, ${p.specs.body.en.toLowerCase()}, roast ${p.specs.roast}/7` : ""}. ${p.notes.en}. From SAR ${Math.min(...p.sizes.map((s) => s.price))} incl. VAT.\n`).join("") +
         `- [For business](${url("business")}): the INGO 2-drink machine, free on a 6- or 12-month loan with free maintenance; supplies bought from INGO as used, no minimum; or buy it for SAR 2,500 incl. VAT with a 2-year warranty. Two drinks picked from 10+ flavours. Free delivery and installation in Riyadh, Jeddah, Dammam and Madinah.\n\n` +
         `## Contact\n\n- Email: info@ingo.sa\n- Phone: 920000384\n`);
 

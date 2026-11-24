@@ -2,7 +2,7 @@ import { useMemo, useState, type FormEvent, type ReactNode } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, ArrowRight, Lock, ShieldCheck, ShoppingBag } from "lucide-react";
 import { toast } from "sonner";
-import { PackArt } from "@/components/brand/pack-art";
+import { ProductVisual } from "@/components/store/product-visual";
 import { Field, fieldCls } from "@/components/site/form-bits";
 import { PayLogo, PaymentBadges, type PayLogoId } from "@/components/site/payment-badges";
 import { RevealHeading } from "@/components/store/reveal-heading";
@@ -129,7 +129,7 @@ export default function CheckoutPage() {
                 return (
                   <li key={l.id + l.w} className="flex items-center gap-3 py-3">
                     <span className="relative grid size-14 shrink-0 place-items-center rounded-xl bg-secondary p-1.5">
-                      <PackArt kind={p.art} size={l.w} />
+                      <ProductVisual p={p} size={l.w} className="rounded-md" />
                       <span className="absolute -top-1.5 -end-1.5 grid size-5 place-items-center rounded-full bg-foreground text-[11px] font-bold text-background">{num(l.qty)}</span>
                     </span>
                     <span className="min-w-0 flex-1">

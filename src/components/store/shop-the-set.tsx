@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Plus, ShoppingBag } from "lucide-react";
 import { toast } from "sonner";
-import { PackArt } from "@/components/brand/pack-art";
+import { ProductVisual } from "@/components/store/product-visual";
 import { RevealHeading } from "@/components/store/reveal-heading";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/lib/cart";
@@ -14,9 +14,9 @@ import { cn } from "@/lib/utils";
 
 /** The three bags as they sit together in the hero; each has a hotspot (block 12). */
 const SET = [
-  { id: "ethiopia", w: "250g", pos: "start-[2%] bottom-[6%] w-[30%] -rotate-6", spot: { top: "38%", start: "50%" } },
-  { id: "signature", w: "1kg", pos: "start-[32%] bottom-[10%] z-10 w-[36%]", spot: { top: "30%", start: "50%" } },
-  { id: "daily", w: "500g", pos: "end-[2%] bottom-[6%] w-[29%] rotate-6", spot: { top: "36%", start: "50%" } },
+  { id: "bella-guji", w: "250g", pos: "start-[2%] bottom-[6%] w-[30%] -rotate-6", spot: { top: "38%", start: "50%" } },
+  { id: "black-mountain", w: "1kg", pos: "start-[32%] bottom-[10%] z-10 w-[36%]", spot: { top: "30%", start: "50%" } },
+  { id: "santa-ana", w: "500g", pos: "end-[2%] bottom-[6%] w-[29%] rotate-6", spot: { top: "36%", start: "50%" } },
 ] as const;
 
 /** Block 12 — "shop the look": hotspots on the bag trio, a popover card, a synced item list, and add-all. */
@@ -60,7 +60,7 @@ export function ShopTheSet() {
           <div aria-hidden className="absolute inset-x-[10%] bottom-[4%] h-8 rounded-[50%] bg-[rgba(150,70,20,.22)] blur-2xl" />
           {items.map((i, n) => (
             <div key={i.id} ref={(el) => { artRefs.current[n] = el; }} className={cn("absolute", i.pos)}>
-              <PackArt kind="bag" size={i.w} className="h-auto w-full drop-shadow-[0_24px_24px_rgba(150,70,20,.25)]" />
+              <ProductVisual p={i.p} size={i.w} className="h-auto w-full" />
               <button
                 type="button"
                 onClick={() => pick(n)}
@@ -103,7 +103,7 @@ export function ShopTheSet() {
                   )}
                 >
                   <span className="grid size-14 shrink-0 place-items-center rounded-xl bg-secondary p-1.5" aria-hidden>
-                    <PackArt kind="bag" size={i.w} />
+                    <ProductVisual p={i.p} size={i.w} className="rounded-md" />
                   </span>
                   <span className="flex-1">
                     <span className="block font-bold">{L(i.p.name)}</span>

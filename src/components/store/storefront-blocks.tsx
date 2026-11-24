@@ -5,7 +5,7 @@ import { PackArt } from "@/components/brand/pack-art";
 import { Button } from "@/components/ui/button";
 import { CONFIG } from "@/lib/config";
 import { useI18n } from "@/lib/i18n";
-import { announcement, isLive, offerBanner, ribbons, slides, values, type RibbonTone, type Slide, type ValueIcon } from "@/lib/storefront";
+import { announcement, isLive, ribbons, slides, values, type RibbonTone, type Slide, type ValueIcon } from "@/lib/storefront";
 import { cn } from "@/lib/utils";
 
 /**
@@ -162,28 +162,6 @@ export function ValueStrip() {
         );
       })}
     </ul>
-  );
-}
-
-/* ---------------- mid-page offer banner ---------------- */
-export function OfferBannerBlock() {
-  const { L } = useI18n();
-  if (!isLive(offerBanner)) return null;
-  const b = offerBanner;
-  return (
-    <section className="container-ingo py-12 md:py-16">
-      <div className="grid overflow-hidden rounded-[2rem] bg-foreground text-background md:grid-cols-[1.1fr_.9fr]">
-        <div className="flex flex-col justify-center gap-3 p-8 md:p-12">
-          <p className="text-sm font-bold text-orange">{L(b.eyebrow)}</p>
-          <h2 className="text-3xl leading-[1.2] font-black md:text-5xl">{L(b.title)}</h2>
-          <p className="max-w-md text-base text-background/75 md:text-lg">{L(b.body)}</p>
-          <Button asChild size="lg" className="mt-3 h-12 w-fit rounded-full bg-orange px-7 font-bold text-foreground hover:bg-flame">
-            <Link to={b.cta.to}>{L(b.cta.label)}</Link>
-          </Button>
-        </div>
-        <img src={b.image} alt="" loading="lazy" decoding="async" className="aspect-[16/10] size-full object-cover md:aspect-auto" />
-      </div>
-    </section>
   );
 }
 

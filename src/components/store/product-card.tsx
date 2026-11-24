@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Plus } from "lucide-react";
 import { toast } from "sonner";
-import { PackArt } from "@/components/brand/pack-art";
+import { ProductVisual } from "@/components/store/product-visual";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/lib/cart";
 import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
@@ -45,7 +45,7 @@ export function ProductCard({ p }: { p: Product }) {
       <div className={cn("relative grid aspect-[5/4] place-items-center overflow-hidden p-8", p.cat === "beans" ? "bg-secondary" : "bg-secondary")}>
         <Link to={`/shop/${p.id}`} aria-label={`${t("store.details")} — ${L(p.name)}`} className="grid h-full w-full place-items-center outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-2xl">
           <div ref={artRef} className="h-full transition-transform duration-500 group-hover:scale-[1.04] group-hover:-rotate-2">
-            <PackArt kind={p.art} size={size} className="drop-shadow-[0_22px_20px_rgba(150,70,20,.25)]" />
+            <ProductVisual p={p} size={size} className={p.image ? undefined : "drop-shadow-[0_22px_20px_rgba(150,70,20,.25)]"} />
           </div>
         </Link>
         <span className="pointer-events-none absolute top-4 start-4 rounded-full bg-card/90 px-3 py-1 text-xs font-bold text-flame-ink shadow-sm">{L(p.tagline)}</span>

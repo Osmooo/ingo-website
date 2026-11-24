@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight, Minus, Plus, ShoppingBag, Trash2, Truck } from "lucide-react";
-import { PackArt } from "@/components/brand/pack-art";
+import { ProductVisual } from "@/components/store/product-visual";
 import { PaymentBadges, SplitNote } from "@/components/site/payment-badges";
 import { RevealHeading } from "@/components/store/reveal-heading";
 import { Button } from "@/components/ui/button";
@@ -79,7 +79,7 @@ export default function CartPage() {
                     return (
                       <li key={l.id + l.w} className="cart-row flex flex-wrap items-center gap-5 p-5 md:flex-nowrap">
                         <Link to={`/shop/${p.id}`} className="grid size-24 shrink-0 place-items-center rounded-2xl bg-secondary p-2" aria-label={L(p.name)}>
-                          <PackArt kind={p.art} size={l.w} />
+                          <ProductVisual p={p} size={l.w} className="rounded-md" />
                         </Link>
                         <div className="min-w-0 flex-1">
                           <Link to={`/shop/${p.id}`} className="text-xl font-light hover:underline">{L(p.name)}</Link>

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Minus, Plus, ShoppingBag, Trash2, Truck } from "lucide-react";
-import { PackArt } from "@/components/brand/pack-art";
+import { ProductVisual } from "@/components/store/product-visual";
 import { PaymentBadges } from "@/components/site/payment-badges";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle } from "@/components/ui/sheet";
@@ -52,7 +52,7 @@ export function CartSheet() {
                 return (
                   <li key={l.id + l.w} className="flex items-center gap-4 py-4">
                     <div className="grid size-18 shrink-0 place-items-center rounded-2xl bg-card p-2 ring-1 ring-border">
-                      <PackArt kind={p.art} size={l.w} />
+                      <ProductVisual p={p} size={l.w} className="rounded-md" />
                     </div>
                     <div className="min-w-0 flex-1">
                       <p className="truncate font-bold">{L(p.name)}</p>

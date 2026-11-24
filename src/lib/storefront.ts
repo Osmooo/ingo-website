@@ -5,7 +5,6 @@
  * Built to move into Odoo 1:1 (see reports/Saudi roasters ecommerce patterns.md):
  *   announcement  → small custom website snippet (Odoo has no core announcement bar)
  *   slides        → Odoo "Carousel" block, one slide per entry, text kept as real text (translatable)
- *   offerBanner   → Odoo "Banner" / "CTA" block
  *   values        → Odoo "Cards Grid" / icon features block
  *   ribbons       → Odoo product ribbons (New / Sale / Sold out…)
  *   promotions    → Odoo Discount & Loyalty programs (codes, buy X get Y, free shipping), with dates
@@ -108,24 +107,6 @@ export const slides: Slide[] = [
   },
 ];
 
-/* ---------------- mid-page offer banner ---------------- */
-
-export interface OfferBanner extends Dated {
-  eyebrow: Text;
-  title: Text;
-  body: Text;
-  cta: { label: Text; to: string };
-  image: string;
-}
-
-export const offerBanner: OfferBanner = {
-  eyebrow: { ar: "محتار في الحجم؟", en: "Not sure which size?" },
-  title: { ar: "جرّب الأحجام الثلاثة", en: "Try all three sizes" },
-  body: { ar: "اختر 250 جم للتجربة، و500 جم أو 1 كجم للي يشرب كل يوم.", en: "Pick 250g to try it, or 500g or 1kg if you drink it every day." },
-  cta: { label: { ar: "اختر حجمك", en: "Pick your size" }, to: "/shop?cat=beans#products" },
-  image: asset("img/roastery/green-beans.webp"),
-};
-
 /* ---------------- value strip under the banners ---------------- */
 
 export type ValueIcon = "roast" | "saudi" | "truck" | "split" | "secure";
@@ -144,7 +125,7 @@ export type RibbonTone = "new" | "sale" | "best" | "soldout";
 
 /** product id → ribbon. Empty until you decide which products get one. */
 export const ribbons: Record<string, { label: Text; tone: RibbonTone } | undefined> = {
-  // example: signature: { label: { ar: "الأكثر مبيعاً", en: "Best seller" }, tone: "best" },
+  // example: "black-mountain": { label: { ar: "الأكثر مبيعاً", en: "Best seller" }, tone: "best" },
 };
 
 /* ---------------- trust details for the footer ---------------- */

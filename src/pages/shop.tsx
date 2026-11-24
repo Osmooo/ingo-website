@@ -2,9 +2,9 @@ import { useLayoutEffect, useMemo, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import { AboutIngo, RoasteryStory, SloganBand, WhyIngo } from "@/components/site/brand-sections";
 import { Display, Eyebrow } from "@/components/site/section-heading";
-import { OfferBannerBlock, PromoSlider, ValueStrip } from "@/components/store/storefront-blocks";
+import { PromoSlider, ValueStrip } from "@/components/store/storefront-blocks";
 import { CategoryTabs, type Filter } from "@/components/store/collection-tiles";
-import { CompareTable } from "@/components/store/compare-table";
+import { OurCoffees } from "@/components/store/our-coffees";
 import { ProductCard } from "@/components/store/product-card";
 import { ShopTheSet } from "@/components/store/shop-the-set";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -114,10 +114,9 @@ export default function Shop() {
         </div>
       </section>
 
-      <OfferBannerBlock />
       <RoasteryStory />
+      <OurCoffees />
       <ShopTheSet />
-      <CompareTable />
       <SloganBand />
       <div className="pt-20 md:pt-28"><WhyIngo /></div>
       <AboutIngo />
