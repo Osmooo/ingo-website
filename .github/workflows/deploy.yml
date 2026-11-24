@@ -29,8 +29,8 @@ jobs:
       - run: npm run build
         env:
           BASE_PATH: /${{ github.event.repository.name }}/
-      # GitHub Pages has no server routing: serve the app for any unknown path (/shop, /business…)
-      - run: cp dist/index.html dist/404.html
+      # GitHub Pages has no server routing: give every real page its own copy (served as 200), 404.html for the rest
+      - run: node scripts/spa-routes.mjs
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
