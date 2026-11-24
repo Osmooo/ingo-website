@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { bagGeometry, PackArt } from "@/components/brand/pack-art";
 import { Eyebrow, SectionHeading } from "@/components/site/section-heading";
 import { ProductCard } from "@/components/store/product-card";
+import { CoffeeGuideSection } from "@/components/store/coffee-guide";
 import { ProductVisual, RoastScale } from "@/components/store/product-visual";
 import { RevealHeading } from "@/components/store/reveal-heading";
 import { Button } from "@/components/ui/button";
@@ -245,6 +246,8 @@ function ProductView({ p }: { p: Product }) {
           </div>
         </div>
       </section>
+
+      <CoffeeGuideSection p={p} />
 
       <section className="py-16 md:py-24">
         <div className="container-ingo">

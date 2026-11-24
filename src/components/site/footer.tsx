@@ -23,6 +23,7 @@ export function Footer() {
     { to: "/", label: t("nav.home") },
     { to: "/shop", label: t("nav.shop") },
     { to: "/business", label: t("nav.business") },
+    { to: "/blog", label: t("nav.blog") },
     { to: "/cart", label: t("nav.cart") },
   ];
   const heading = "mb-4 text-sm font-bold text-white";

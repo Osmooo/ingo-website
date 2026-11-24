@@ -1,6 +1,7 @@
 import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { asset } from "@/lib/asset";
+import { CONFIG } from "@/lib/config";
 
 /**
  * Official acceptance marks in /public/img/pay:
@@ -25,11 +26,11 @@ export function PayLogo({ id, className }: { id: PayLogoId; className?: string }
   return <img src={src} alt={l.alt} loading="lazy" decoding="async" className={cn("w-auto", l.h, className)} />;
 }
 
-const ORDER: PayLogoId[] = ["applepay", "mada", "visa", "mastercard", "tabby", "tamara"];
+const ORDER: PayLogoId[] = [...(CONFIG.applePay ? (["applepay"] as const) : []), "mada", "visa", "mastercard", "tabby", "tamara"];
 
 export function PaymentBadges({ className, dark = false }: { className?: string; dark?: boolean }) {
   return (
-    <ul className={cn("flex flex-wrap items-center gap-2", className)} aria-label="Apple Pay, mada, Visa, Mastercard, Tabby, Tamara">
+    <ul className={cn("flex flex-wrap items-center gap-2", className)} aria-label={ORDER.join(", ")}>
       {ORDER.map((id) => (
         <li key={id} className={cn("grid h-8 min-w-12 place-items-center rounded-md bg-white px-2.5", dark ? "" : "ring-1 ring-border")}>
           <PayLogo id={id} />

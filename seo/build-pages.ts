@@ -15,15 +15,19 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import type { Plugin } from "vite";
 import { PRODUCTS } from "../src/lib/products";
+import { GUIDES } from "../src/lib/coffee-guide";
+import { blocks, POSTS } from "../src/lib/blog";
 
 interface Page {
   path: string; // "" for home, "shop", "shop/signature"…
   title: string;
   description: string;
   index: boolean;
-  type?: "website" | "product";
+  type?: "website" | "product" | "article";
   jsonld?: object[];
   image?: string; // absolute URL for og:image (defaults to the roastery photo)
+  /** readable page text placed inside #root, so crawlers that don't run JavaScript still see the content */
+  body?: string;
 }
 
 const BRAND = "إن قو";
@@ -72,6 +76,23 @@ export function seoPages(): Plugin {
         inLanguage: ["ar", "en"],
         publisher: { "@id": `${site}/#organization` },
       };
+      /** Plain HTML of an article body (same markup rules as the React page). */
+      const blocksHtml = (body: string[]) => blocks(body).map((b) =>
+        b.t === "h" ? `<h2>${esc(b.text)}</h2>`
+        : b.t === "ul" || b.t === "ol" ? `<${b.t}>${b.items.map((x) => `<li>${esc(x)}</li>`).join("")}</${b.t}>`
+        : `<p>${esc(b.text)}</p>`).join("");
+      /** Product text for crawlers: name, short + full description, details and suggested recipes. */
+      const productBody = (p: (typeof PRODUCTS)[number]) => {
+        const g = GUIDES[p.id];
+        const sp = p.specs;
+        const name = { hot: "V60 حار", iced: "V60 بارد", espresso: "إسبريسو" } as const;
+        return `<article class="container-ingo py-12"><h1>${esc(p.name.ar)} – ${esc(p.tagline.ar)}</h1>` +
+          `<p>${esc(p.description.ar)}</p><p>النكهات: ${esc(p.notes.ar)}. الأحجام: ${p.sizes.map((x) => `${x.w} (${x.price} ريال)`).join("، ")}.</p>` +
+          (sp ? `<ul><li>المنشأ: ${esc(sp.origin.ar)}</li><li>المعالجة: ${esc(sp.process.ar)}</li><li>السلالة: ${esc(sp.variety.ar)}</li><li>القوام: ${esc(sp.body.ar)}</li><li>درجة التحميص: ${sp.roast} من 7</li></ul>` : "") +
+          (g ? `<h2>عن هذه القهوة</h2>${g.story.ar.map((x) => `<p>${esc(x)}</p>`).join("")}<h2>طريقة التحضير</h2>` +
+            g.recipes.map((r) => `<h3>${name[r.kind]}</h3><p>${r.dose} جم قهوة، ${r.kind === "espresso" ? `${r.water} جم في الكوب` : `${r.water} مل ماء${r.ice ? ` و${r.ice} جم ثلج` : ""}`}، حرارة الماء ${r.temp} درجة، الوقت ${r.time}${r.kind === "espresso" ? " ثانية" : ""}. الطحنة: ${esc(r.grind.ar)}. ${esc(r.tip.ar)}</p>`).join("") : "") +
+          `</article>`;
+      };
       const crumbs = (items: [string, string][]) => ({
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
@@ -119,6 +140,7 @@ export function seoPages(): Plugin {
             description,
             index: true,
             image,
+            body: productBody(p),
             jsonld: [
               {
                 "@context": "https://schema.org",
@@ -156,6 +178,39 @@ export function seoPages(): Plugin {
             ],
           };
         }),
+        {
+          path: "blog",
+          title: "مدونة إن قو | وصفات تحضير القهوة ونصائح القهوة المختصة",
+          description: "وصفات V60 حار وبارد، الفرق بين القهوة المجففة والمغسولة، وطريقة حفظ حبوب القهوة. مقالات من محمصة إن قو.",
+          index: true,
+          jsonld: [crumbs([["الرئيسية", ""], ["المدونة", "blog"]])],
+          body: `<section class="container-ingo py-12"><h1>مدونة إن قو</h1><ul>${POSTS.map((b) => `<li><a href="${url(`blog/${b.slug}`)}">${esc(b.ar.title)}</a>: ${esc(b.ar.excerpt)}</li>`).join("")}</ul></section>`,
+        },
+        ...POSTS.map((b): Page => ({
+          path: `blog/${b.slug}`,
+          type: "article",
+          title: `${b.ar.title} | ${BRAND}`,
+          description: clip(b.ar.excerpt),
+          index: true,
+          image: file(b.cover),
+          body: `<article class="container-ingo py-12"><h1>${esc(b.ar.title)}</h1><p>${esc(b.ar.excerpt)}</p>${blocksHtml(b.ar.body)}</article>`,
+          jsonld: [
+            {
+              "@context": "https://schema.org",
+              "@type": "BlogPosting",
+              headline: b.ar.title,
+              description: b.ar.excerpt,
+              image: [file(b.cover)],
+              datePublished: b.date,
+              dateModified: b.date,
+              inLanguage: "ar",
+              author: { "@type": "Organization", name: "INGO", url: url("") },
+              publisher: { "@id": `${site}/#organization` },
+              mainEntityOfPage: url(`blog/${b.slug}`),
+            },
+            crumbs([["الرئيسية", ""], ["المدونة", "blog"], [b.ar.title, `blog/${b.slug}`]]),
+          ],
+        })),
       ];
 
       const template = readFileSync(join(dist, "index.html"), "utf8");
@@ -166,7 +221,7 @@ export function seoPages(): Plugin {
           `<meta name="robots" content="${pg.index ? "index, follow, max-image-preview:large" : "noindex, follow"}" />`,
           canonical ? `<link rel="canonical" href="${canonical}" />` : "",
           `<meta property="og:site_name" content="INGO | ${BRAND}" />`,
-          `<meta property="og:type" content="${pg.type === "product" ? "product" : "website"}" />`,
+          `<meta property="og:type" content="${pg.type ?? "website"}" />`,
           `<meta property="og:title" content="${esc(pg.title)}" />`,
           `<meta property="og:description" content="${esc(pg.description)}" />`,
           canonical ? `<meta property="og:url" content="${canonical}" />` : "",
@@ -179,7 +234,8 @@ export function seoPages(): Plugin {
         return template
           .replace(/<title>[\s\S]*?<\/title>/, "")
           .replace(/<meta name="description"[^>]*>/, "")
-          .replace("</head>", `    ${head}\n  </head>`);
+          .replace("</head>", `    ${head}\n  </head>`)
+          .replace('<div id="root"></div>', `<div id="root">${pg.body ?? ""}</div>`);
       };
 
       for (const pg of pages) {
@@ -204,7 +260,9 @@ export function seoPages(): Plugin {
         `# INGO (إن قو)\n\n` +
         `> INGO is a Saudi coffee brand that roasts its own coffee. It sells specialty coffee beans (250g, 500g, 1kg), instant coffee sticks and drip bags to individuals, and places self-service coffee machines in baqalas, mini markets, supermarkets, restaurants and cafeterias.\n\n` +
         `## Pages\n\n` +
-        `- [Shop](${url("shop")}): specialty beans and instant products, delivery across Saudi Arabia in 2–5 working days. Payment: Apple Pay, mada, Visa, Mastercard, Tabby, Tamara.\n` +
+        `- [Shop](${url("shop")}): specialty beans and instant products, delivery across Saudi Arabia in 2–5 working days. Payment: mada, Visa, Mastercard, Tabby, Tamara.\n` +
+        POSTS.map((b) => `- [${b.en.title}](${url(`blog/${b.slug}`)}): ${b.en.excerpt}
+`).join("") +
         PRODUCTS.map((p) => `- [${p.name.en}](${url(`shop/${p.id}`)}): ${p.tagline.en}${p.specs ? `, ${p.specs.variety.en}, ${p.specs.body.en.toLowerCase()}, roast ${p.specs.roast}/7` : ""}. ${p.notes.en}. From SAR ${Math.min(...p.sizes.map((s) => s.price))} incl. VAT.\n`).join("") +
         `- [For business](${url("business")}): the INGO 2-drink machine, free on a 6- or 12-month loan with free maintenance; supplies bought from INGO as used, no minimum; or buy it for SAR 2,500 incl. VAT with a 2-year warranty. Two drinks picked from 10+ flavours. Free delivery and installation in Riyadh, Jeddah, Dammam and Madinah.\n\n` +
         `## Contact\n\n- Email: info@ingo.sa\n- Phone: 920000384\n`);

@@ -21,6 +21,8 @@ const Shop = lazy(loadShop);
 const Business = lazy(loadBusiness);
 const ProductPage = lazy(loadProduct);
 const CartPage = lazy(loadCart);
+const Blog = lazy(() => import("@/pages/blog"));
+const BlogPost = lazy(() => import("@/pages/blog-post"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 const CheckoutPage = lazy(() => import("@/pages/checkout"));
 const CheckoutResult = lazy(() => import("@/pages/checkout-result"));
@@ -93,6 +95,8 @@ export default function App() {
                 <Route path="checkout" element={<CheckoutPage />} />
                 <Route path="checkout/result" element={<CheckoutResult />} />
                 <Route path="business" element={<Business />} />
+                <Route path="blog" element={<Blog />} />
+                <Route path="blog/:slug" element={<BlogPost />} />
                 <Route path="*" element={<NotFound />} />
               </Route>
             </Routes>

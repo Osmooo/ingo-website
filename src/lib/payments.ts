@@ -90,6 +90,10 @@ export interface PendingOrder {
   email?: string;
   city: string;
   address: string;
+  /** Saudi National Address short code, e.g. RRRD2929 */
+  shortAddress: string;
+  /** "lat,lng" when the customer pinned their location */
+  location?: string;
   notes?: string;
   items: string;
   total: number; // SAR
@@ -121,7 +125,8 @@ const halalas = (sar: number) => Math.round(sar * 100);
 /** Order details travel with the payment, so they show next to it in the Moyasar dashboard. */
 function metadata(o: PendingOrder): Record<string, string> {
   return {
-    order_ref: o.ref, name: o.name, phone: o.phone, email: o.email || "", city: o.city,
+    order_ref: o.ref, name: o.name, phone: o.phone, email: o.email || "", city: o.city, short_address: o.shortAddress,
+    location: o.location || "",
     address: o.address.slice(0, 250), items: o.items.slice(0, 250), notes: (o.notes || "").slice(0, 250),
   };
 }
@@ -211,6 +216,7 @@ interface ApplePayInstance {
 const AP = () => (window as unknown as { ApplePaySession?: ApplePaySessionLike }).ApplePaySession;
 
 export function applePayAvailable() {
+  if (!CONFIG.applePay) return false;
   try { return Boolean(AP()?.canMakePayments()); } catch { return false; }
 }
 

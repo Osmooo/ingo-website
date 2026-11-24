@@ -1,6 +1,6 @@
 import { useMemo, useState, type FormEvent, type ReactNode } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, ArrowRight, Lock, ShieldCheck, ShoppingBag } from "lucide-react";
+import { ArrowLeft, ArrowRight, Lock, MapPin, ShieldCheck, ShoppingBag } from "lucide-react";
 import { toast } from "sonner";
 import { ProductVisual } from "@/components/store/product-visual";
 import { Field, fieldCls } from "@/components/site/form-bits";
@@ -24,7 +24,9 @@ import { asset } from "@/lib/asset";
 
 const PHONE = "^(05|\\+9665|9665)[0-9]{8}$";
 type Method = "card" | "applepay" | BnplProvider;
-interface Delivery { name: string; phone: string; email: string; city: string; address: string; notes: string }
+interface Delivery { name: string; phone: string; email: string; shortAddress: string; city: string; address: string; location: string; notes: string }
+/** Saudi National Address short code: 4 letters + 4 digits (e.g. RRRD2929) */
+const SHORT = "^[A-Za-z]{4}[0-9]{4}$";
 
 /** Checkout in two steps on one page: 1. delivery details, 2. payment (card and Apple Pay via Moyasar; Tabby and Tamara via your backend). */
 export default function CheckoutPage() {
@@ -88,7 +90,7 @@ export default function CheckoutPage() {
           <div className="grid gap-5">
             {/* step 1 */}
             <StepCard n={num(1)} title={t("ck.step1")} active={step === 1} done={step === 2} onEdit={() => setStep(1)} editLabel={t("ck.edit")}
-              summary={delivery && `${delivery.name} · ${delivery.phone} · ${delivery.city}، ${delivery.address}`}>
+              summary={delivery && `${delivery.name} · ${delivery.phone} · ${delivery.shortAddress} · ${delivery.city}، ${delivery.address}`}>
               <DeliveryForm initial={delivery} onDone={(d) => { setDelivery(d); setStep(2); }} />
             </StepCard>
 
@@ -180,7 +182,7 @@ function DeliveryForm({ initial, onDone }: { initial: Delivery | null; onDone: (
     const f = e.currentTarget;
     if (!f.reportValidity()) return;
     const d = Object.fromEntries(new FormData(f)) as unknown as Delivery;
-    onDone({ ...d, name: d.name.trim(), city: d.city.trim(), address: d.address.trim() });
+    onDone({ ...d, name: d.name.trim(), shortAddress: d.shortAddress.trim().toUpperCase(), city: d.city.trim(), address: d.address.trim() });
   };
   return (
     <form onSubmit={submit} className="grid gap-4 sm:grid-cols-2">
@@ -193,6 +195,7 @@ function DeliveryForm({ initial, onDone }: { initial: Delivery | null; onDone: (
       <Field label={t("ck.email")} optional={t("optional")} htmlFor="ck-email">
         <Input id="ck-email" name="email" type="email" dir="ltr" autoComplete="email" defaultValue={initial?.email} className={fieldCls} />
       </Field>
+      <AddressFinder initial={initial} />
       <Field label={t("co.city")} required htmlFor="ck-city">
         <Input id="ck-city" name="city" required autoComplete="address-level2" defaultValue={initial?.city} className={fieldCls} />
       </Field>
@@ -210,7 +213,7 @@ function DeliveryForm({ initial, onDone }: { initial: Delivery | null; onDone: (
 function MethodPicker({ value, onChange }: { value: Method; onChange: (m: Method) => void }) {
   const { t } = useI18n();
   const items: { id: Method; label: ReactNode; icon: ReactNode }[] = [
-    { id: "applepay", label: <span className="sr-only">Apple Pay</span>, icon: <PayLogo id="applepay" className="h-5" /> },
+    ...(CONFIG.applePay ? [{ id: "applepay" as Method, label: <span className="sr-only">Apple Pay</span>, icon: <PayLogo id="applepay" className="h-5" /> }] : []),
     {
       id: "card", label: <span className="sr-only">{t("ck.card")}</span>,
       icon: <span className="flex items-center gap-2"><PayLogo id="mada" /><PayLogo id="visa" /><PayLogo id="mastercard" /></span>,
@@ -459,6 +462,78 @@ function BnplPanel({ provider, onContinue }: { provider: BnplProvider; onContinu
       >
         {busy ? t("ck.paying") : t("bnpl.continue", { x: name })}
       </Button>
+    </div>
+  );
+}
+
+/* ---------------- Saudi short address + location pin ---------------- */
+
+/**
+ * The National Address short code (4 letters + 4 digits, from the SPL "سبل" app or Tawakkalna).
+ * With CONFIG.addressLookupEndpoint set, "Find" fills city and street from SPL. "Use my location"
+ * adds a map pin (lat,lng) to the order so the driver can open it in Google Maps.
+ */
+function AddressFinder({ initial }: { initial: Delivery | null }) {
+  const { t } = useI18n();
+  const [loc, setLoc] = useState(initial?.location ?? "");
+  const [busy, setBusy] = useState<"" | "find" | "locate">("");
+
+  const find = async (form: HTMLFormElement | null) => {
+    const input = form?.elements.namedItem("shortAddress") as HTMLInputElement | null;
+    if (!form || !input || !input.reportValidity()) return;
+    setBusy("find");
+    try {
+      const res = await fetch(`${CONFIG.addressLookupEndpoint}?code=${encodeURIComponent(input.value.trim().toUpperCase())}`);
+      if (!res.ok) throw new Error();
+      const a = (await res.json()) as { city?: string; district?: string; street?: string; building?: string; postcode?: string; lat?: number; lng?: number };
+      const set = (name: string, v?: string) => { const el = form.elements.namedItem(name) as HTMLInputElement | null; if (el && v) el.value = v; };
+      set("city", a.city);
+      set("address", [a.district, a.street, a.building, a.postcode].filter(Boolean).join("، "));
+      if (a.lat && a.lng) setLoc(`${a.lat},${a.lng}`);
+      toast.success(t("ck.sa.found"));
+    } catch {
+      toast.error(t("ck.sa.notFound"));
+    } finally { setBusy(""); }
+  };
+
+  const locate = () => {
+    if (!navigator.geolocation) return toast.error(t("ck.loc.fail"));
+    setBusy("locate");
+    navigator.geolocation.getCurrentPosition(
+      (p) => { setLoc(`${p.coords.latitude.toFixed(6)},${p.coords.longitude.toFixed(6)}`); setBusy(""); },
+      () => { toast.error(t("ck.loc.fail")); setBusy(""); },
+      { enableHighAccuracy: true, timeout: 15000 },
+    );
+  };
+
+  return (
+    <div className="grid gap-3 rounded-2xl bg-secondary/60 p-4 sm:col-span-2">
+      <Field label={t("ck.sa")} required htmlFor="ck-short">
+        <div className="flex gap-2">
+          <Input
+            id="ck-short" name="shortAddress" required pattern={SHORT} maxLength={8} dir="ltr" placeholder="RRRD2929"
+            autoCapitalize="characters" autoComplete="off" defaultValue={initial?.shortAddress}
+            title={t("ck.sa.format")} className={cn(fieldCls, "uppercase tracking-wider")}
+          />
+          {CONFIG.addressLookupEndpoint && (
+            <Button type="button" variant="outline" className="h-12 rounded-xl" disabled={busy === "find"} onClick={(e) => find(e.currentTarget.form)}>
+              {t("ck.sa.find")}
+            </Button>
+          )}
+        </div>
+      </Field>
+      <p className="text-xs text-muted-foreground">{t("ck.sa.hint")}</p>
+      <input type="hidden" name="location" value={loc} />
+      <div className="flex flex-wrap items-center gap-3">
+        <Button type="button" variant="outline" className="rounded-full" disabled={busy === "locate"} onClick={locate}>
+          <MapPin aria-hidden className="size-4" /> {loc ? t("ck.loc.again") : t("ck.loc")}
+        </Button>
+        {loc && (
+          <a href={`https://www.google.com/maps?q=${loc}`} target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-flame-ink underline-offset-4 hover:underline">
+            {t("ck.loc.done")}
+          </a>
+        )}
+      </div>
     </div>
   );
 }

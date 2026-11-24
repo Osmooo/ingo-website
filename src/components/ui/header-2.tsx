@@ -17,6 +17,7 @@ const LINKS: { to: string; key: DictKey }[] = [
   { to: "/", key: "nav.home" },
   { to: "/shop", key: "nav.shop" },
   { to: "/business", key: "nav.business" },
+  { to: "/blog", key: "nav.blog" },
 ];
 
 /**

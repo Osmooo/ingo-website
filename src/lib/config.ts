@@ -11,7 +11,17 @@ export const CONFIG = {
    * to receive JSON. Left empty, the site opens a pre-filled email to CONFIG.email.
    */
   orderEndpoint: "",
+  /** Apple Pay: off until the payment gateway account has Apple Pay switched on. */
+  applePay: false,
   /**
+   * Optional: a backend URL (yours) that turns a Saudi short address (e.g. RRRD2929) into the full
+   * National Address using the SPL API (api.address.gov.sa, needs an SPL subscription key, so it must
+   * run on a server, never in the site). The site GETs `<endpoint>?code=RRRD2929` and expects
+   * { city, district, street, building, postcode, lat, lng }. Empty = the customer types the address.
+   */
+  addressLookupEndpoint: "",
+  /**
+   * Payment gateway for mada / Visa / Mastercard: Moyasar (a Saudi gateway licensed by SAMA).
    * Moyasar PUBLISHABLE key (pk_test_… while testing, pk_live_… when live), from the Moyasar
    * dashboard → Settings → API keys. Never put the secret key (sk_…) here. Empty = online
    * payment switched off: checkout shows a notice and takes no card details.
