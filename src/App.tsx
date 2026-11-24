@@ -4,6 +4,7 @@ import { Direction } from "radix-ui";
 import { CartSheet } from "@/components/site/cart-sheet";
 import { Footer } from "@/components/site/footer";
 import { Header } from "@/components/ui/header-2";
+import { AnnouncementBar } from "@/components/store/storefront-blocks";
 import { Toaster } from "@/components/ui/sonner";
 import { CartProvider } from "@/lib/cart";
 import { I18nProvider, useI18n } from "@/lib/i18n";
@@ -63,6 +64,7 @@ function Layout() {
       <a href="#main" className="skip-link">{t("nav.skip")}</a>
       <ScrollToTop />
       <PrefetchPages />
+      <AnnouncementBar />
       <Header />
       {/* the page is an opaque layer above the footer; at the end it slides up and uncovers it (curtain reveal) */}
       <main id="main" tabIndex={-1} className="relative z-10 flex-1 bg-background shadow-[0_40px_60px_-30px_rgba(35,31,32,.45)] outline-none">

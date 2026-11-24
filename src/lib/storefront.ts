@@ -3,6 +3,7 @@
  * Code reads this file only; change the content here, not in the components.
  *
  * Built to move into Odoo 1:1 (see reports/Saudi roasters ecommerce patterns.md):
+ *   announcement  → small custom website snippet (Odoo has no core announcement bar)
  *   slides        → Odoo "Carousel" block, one slide per entry, text kept as real text (translatable)
  *   values        → Odoo "Cards Grid" / icon features block
  *   ribbons       → Odoo product ribbons (New / Sale / Sold out…)
@@ -33,6 +34,20 @@ export function isLive(item: Dated, today = new Date()) {
   if (item.end && day > item.end) return false;
   return true;
 }
+
+/* ---------------- announcement bar (top of every page) ---------------- */
+
+export interface Announcement extends Dated {
+  /** "{shipping}" is replaced with the free-shipping amount from config.ts */
+  text: Text;
+  link?: string;
+}
+
+export const announcement: Announcement[] = [
+  { text: { ar: "شحن مجاني للطلبات فوق {shipping}", en: "Free shipping on orders over {shipping}" }, link: "/shop" },
+  { text: { ar: "قسّم طلبك على 4 دفعات مع تابي وتمارا", en: "Split your order into 4 payments with Tabby or Tamara" } },
+  { text: { ar: "التوصيل خلال 2–5 أيام عمل", en: "Delivery in 2–5 working days" } },
+];
 
 /* ---------------- shop banner slider ---------------- */
 

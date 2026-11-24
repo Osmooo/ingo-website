@@ -3,14 +3,35 @@ import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight, CreditCard, Flag, Flame, ShieldCheck, Truck } from "lucide-react";
 import { PackArt } from "@/components/brand/pack-art";
 import { Button } from "@/components/ui/button";
+import { CONFIG } from "@/lib/config";
 import { useI18n } from "@/lib/i18n";
-import { isLive, ribbons, slides, values, type RibbonTone, type Slide, type ValueIcon } from "@/lib/storefront";
+import { announcement, isLive, ribbons, slides, values, type RibbonTone, type Slide, type ValueIcon } from "@/lib/storefront";
 import { cn } from "@/lib/utils";
 
 /**
  * Storefront blocks. Content comes from lib/storefront.ts; each block matches an Odoo website block
  * so it can be rebuilt there and edited without code. No auto-play and no moving parts.
  */
+
+/* ---------------- announcement bar ---------------- */
+export function AnnouncementBar() {
+  const { L, money } = useI18n();
+  const live = announcement.filter((a) => isLive(a));
+  if (!live.length) return null;
+  const text = (i: number) => L(live[i].text).replace("{shipping}", money(CONFIG.freeShippingOver));
+  return (
+    <div className="bg-foreground text-background">
+      <ul className="container-ingo flex min-h-9 items-center justify-center gap-x-8 py-1.5 text-center text-xs font-semibold md:text-sm">
+        {live.map((a, i) => (
+          // phones show the first message only; wider screens show them side by side
+          <li key={i} className={cn(i > 0 && "hidden", i === 1 && "md:block", i >= 2 && "lg:block")}>
+            {a.link ? <Link to={a.link} className="underline-offset-4 hover:underline">{text(i)}</Link> : text(i)}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 /* ---------------- banner slider ---------------- */
 const THEME: Record<Slide["theme"], string> = {
