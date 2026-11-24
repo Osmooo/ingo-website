@@ -1,0 +1,21 @@
+# Hostinger (LiteSpeed / Apache): the site is a single-page app, so any address that isn't a real
+# file (/shop, /business, /shop/signature…) is answered with index.html and the app shows the page.
+# GitHub Pages ignores this file.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
+
+# keep the built files cached; the page itself is always re-checked so updates show straight away
+<IfModule mod_headers.c>
+  <FilesMatch "\.(js|css|woff2|otf|webp|svg|png|jpg)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
