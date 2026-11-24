@@ -34,7 +34,9 @@ export function seoPages(): Plugin {
     apply: "build",
     closeBundle() {
       const dist = "dist";
-      const site = (process.env.SITE_URL || "https://ingo.sa").replace(/\/$/, "");
+      // domain in lowercase so canonical links and the sitemap always use one exact address
+      const raw = new URL(process.env.SITE_URL || "https://ingo.sa");
+      const site = `${raw.protocol}//${raw.host.toLowerCase()}${raw.pathname}`.replace(/\/$/, "");
       const url = (p: string) => `${site}/${p ? `${p}/` : ""}`;
       const file = (p: string) => `${site}/${p}`; // public files (images, sitemap) at the root of SITE_URL
       const ogImage = file("img/roastery/pour-cooling-tray.webp");
