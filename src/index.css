@@ -1,0 +1,126 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Saudi Riyal sign (U+20C1), drawn from SAMA's official SVG; only this character comes from this font */
+@font-face { font-family: "Saudi Riyal"; src: url(/fonts/saudi-riyal.woff2) format("woff2"), url(/fonts/saudi-riyal.otf) format("opentype"); unicode-range: U+20C1; font-display: block; }
+/* ---------- Tajarib: 5 files, every CSS weight mapped to the nearest real cut (no faux bold) ---------- */
+@font-face { font-family: "Tajarib"; src: url(/fonts/Tajarib-Light.woff2) format("woff2"), url(/fonts/Tajarib-Light.otf) format("opentype"); font-weight: 100 300; font-display: swap; }
+@font-face { font-family: "Tajarib"; src: url(/fonts/Tajarib-Regular.woff2) format("woff2"), url(/fonts/Tajarib-Regular.otf) format("opentype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Tajarib"; src: url(/fonts/Tajarib-Medium.woff2) format("woff2"), url(/fonts/Tajarib-Medium.otf) format("opentype"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Tajarib"; src: url(/fonts/Tajarib-Bold.woff2) format("woff2"), url(/fonts/Tajarib-Bold.otf) format("opentype"); font-weight: 600 700; font-display: swap; }
+@font-face { font-family: "Tajarib"; src: url(/fonts/Tajarib-Black.woff2) format("woff2"), url(/fonts/Tajarib-Black.otf) format("opentype"); font-weight: 800 900; font-display: swap; }
+
+/* ---------- INGO brand tokens (from the 250g / 500g / 1kg packaging) ---------- */
+:root {
+  --radius: 1rem;
+  --background: #FDF0E4;          /* bag cream */
+  --foreground: #231F20;          /* logo ink */
+  --card: #FFFFFF;
+  --card-foreground: #231F20;
+  --popover: #FFFFFF;
+  --popover-foreground: #231F20;
+  --primary: #231F20;
+  --primary-foreground: #FDF0E4;
+  --secondary: #FAE3CF;
+  --secondary-foreground: #231F20;
+  --muted: #FAE3CF;
+  --muted-foreground: #6E5E55;
+  --accent: #FBE6D3;
+  --accent-foreground: #231F20;
+  --destructive: #C2410C;
+  --border: #EFD9C5;
+  --input: #EFD9C5;
+  --ring: #EE8A2E;
+
+  --ingo-cream: #FDF0E4;
+  --ingo-peach: #F7C9A0;
+  --ingo-apricot: #F4B88A;
+  --ingo-orange: #EE8A2E;         /* 1kg bag base */
+  --ingo-flame: #E4601F;          /* 1kg bag deep rings */
+  --ingo-ember: #C9521A;
+  --ingo-flame-ink: #B2461A;      /* orange for text on cream: 4.9:1 */
+}
+
+@theme inline {
+  --font-sans: "Saudi Riyal", "Tajarib", ui-sans-serif, system-ui, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-cream: var(--ingo-cream);
+  --color-peach: var(--ingo-peach);
+  --color-apricot: var(--ingo-apricot);
+  --color-orange: var(--ingo-orange);
+  --color-flame: var(--ingo-flame);
+  --color-ember: var(--ingo-ember);
+  --color-flame-ink: var(--ingo-flame-ink);
+  --radius-sm: calc(var(--radius) - 6px);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * { @apply border-border outline-ring/50; }
+  html { scroll-behavior: smooth; }
+  body { @apply bg-background text-foreground antialiased; font-feature-settings: "kern"; }
+  ::selection { background: var(--ingo-orange); color: #fff; }
+}
+
+@utility bg-pattern-cream { background: var(--ingo-cream) url(/img/pattern-cream.svg) center / cover; }
+@utility bg-pattern-orange { background: var(--ingo-orange) url(/img/pattern-orange.svg) center / cover; color: var(--foreground); }
+@utility container-ingo { width: min(1200px, 100% - 32px); margin-inline: auto; }
+@utility flip-rtl { [dir="rtl"] & { transform: scaleX(-1); } }
+
+
+/* ---------- accessibility (UI Skills: fixing-accessibility, accessible-animation) ---------- */
+.skip-link {
+  position: fixed; inset-inline-start: 16px; top: 12px; z-index: 100;
+  transform: translateY(-160%); transition: transform .15s ease;
+  background: var(--foreground); color: var(--background);
+  padding: 10px 16px; border-radius: 12px; font-weight: 600;
+}
+.skip-link:focus-visible { transform: none; outline: 2px solid var(--ingo-orange); outline-offset: 2px; }
+
+/* Tiered reduced motion: kill large/looping CSS motion, keep colour and opacity feedback.
+   JS motion (Motion, GSAP, marquee, rotating text, showcase autoplay) is gated in code. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+  .motion-lift, .motion-lift * { transform: none !important; }
+}
+
+/* ---------- Tajarib display typography (from the Harf Type specimen) ----------
+   ss01 = Tajarib's swash set: long tails on ك ي ى ن ب ت س ص ف ق م.
+   Only on Arabic display text; body copy keeps the regular forms for easy reading. */
+html[lang="ar"] :is(h1, h2),
+html[lang="ar"] .swash,
+.swash:lang(ar) {
+  font-feature-settings: "ss01" 1;
+}
+/* headlines need a little more room for the long descending tails */
+html[lang="ar"] :is(h1, h2) { line-height: 1.3; padding-bottom: .08em; }
+
+/* RTL: fields that must be typed left-to-right (phone, email, CR, URL) still sit on the right edge in Arabic */
+html[dir="rtl"] :is(input, textarea)[dir="ltr"] { text-align: right; }
+html[dir="rtl"] input[dir="ltr"]::placeholder { text-align: right; }
